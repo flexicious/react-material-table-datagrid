@@ -5,14 +5,19 @@
   "keywords": [],
   "main": "src/index.js",
   "dependencies": {
-    "flexicious-react-datagrid": "1.8.8",
-    "flexicious-react-datagrid-styles": "^1.2.9",
-    "node-sass": "^4.11.0",
-    "react": "16.5.2",
-    "react-dom": "16.5.2",
-    "react-scripts": "2.0.3"
+    "flexicious-react-datagrid": "latest"
   },
-  "devDependencies": {},
+  "peerDependencies": {
+  },
+  "devDependencies": {
+    "node-sass": "^4.11.0",
+    "react-scripts": "2.0.3",
+    
+    "@material-ui/core": "^3.7.0",
+    "@material-ui/icons": "^3.0.1",
+    "react": "^15.3.0 || ^16.0.0",
+    "react-dom": "^15.3.0 || ^16.0.0"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
