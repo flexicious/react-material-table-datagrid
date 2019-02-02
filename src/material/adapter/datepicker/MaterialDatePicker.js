@@ -5,6 +5,10 @@ import { withStyles } from '@material-ui/core/styles';
 import DateUtils from '@date-io/moment';
 import { InlineDatePicker, MuiPickersUtilsProvider } from 'material-ui-pickers';
 
+import Toolbar from '@material-ui/core/Toolbar';
+//eslint-disable-next-line
+const toolbar = <Toolbar/>;//needed to import toolbar dor date picker 
+
 type ColorType =
  | 'primary'
  | 'contrast';

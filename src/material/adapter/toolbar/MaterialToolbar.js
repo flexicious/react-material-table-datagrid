@@ -4,6 +4,7 @@
  */
 import React from 'react';
 import { UIUtils, Constants, UIComponent, FlexDataGridEvent, ExtendedFilterPageSortChangeEvent, FlexDataGrid } from "../../../flexicious"
+
 /**
  * A JavaScript only version of the Pager control that significantly cuts down on
  * initialization time. It does so by using pure ActionScript opposed to MXML,
