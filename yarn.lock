@@ -4103,10 +4103,10 @@ flatten@^1.0.2:
   resolved "https://registry.yarnpkg.com/flatten/-/flatten-1.0.2.tgz#dae46a9d78fbe25292258cc1e780a41d95c03782"
   integrity sha1-2uRqnXj74lKSJYzB54CkHZXAN4I=
 
-flexicious-react-datagrid@latest:
-  version "1.8.8"
-  resolved "https://registry.yarnpkg.com/flexicious-react-datagrid/-/flexicious-react-datagrid-1.8.8.tgz#73180f78b820f02846bfbbf31f7ba365467dc778"
-  integrity sha512-7Z8/fhsuMmJ22TixQEaiubQ9JzR7TSeHMlv3KTm9ts6w8eTkBTSOpvTc+gSeziirMbbzdfriu18zRWIw2wzeQQ==
+flexicious-react-datagrid@1.8.9:
+  version "1.8.9"
+  resolved "https://registry.yarnpkg.com/flexicious-react-datagrid/-/flexicious-react-datagrid-1.8.9.tgz#0e2b1e5091c192f3ad181cfe1bab08eb7f581320"
+  integrity sha512-pQavBmEgeXaE4WPx2o6N9TnFCc3PuOOrqtszJn0OSuuqffRF5Hmv7Lc0ZT/Hjhi6yYR5Jcc34KglEZmpJn3f2w==
 
 flush-write-stream@^1.0.0:
   version "1.0.3"
@@ -8411,14 +8411,6 @@ react-dev-utils@^6.0.3:
     object-assign "^4.1.1"
     prop-types "^15.6.2"
     scheduler "^0.12.0"
-
-react-draggable@^3.1.1:
-  version "3.1.1"
-  resolved "https://registry.yarnpkg.com/react-draggable/-/react-draggable-3.1.1.tgz#ed1db43e09b146805f6d158296e58eae4f768d36"
-  integrity sha512-tqIgDUm4XPSFbxelYpcsnayPU79P26ChnszDl5/RDFKfMuHnRxypS+OFfEyAEO1CtqaB3lrecQ2dyNIE2G0TlQ==
-  dependencies:
-    classnames "^2.2.5"
-    prop-types "^15.6.0"
 
 react-error-overlay@^5.1.0:
   version "5.1.2"

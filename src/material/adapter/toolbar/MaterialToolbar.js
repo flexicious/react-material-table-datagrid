@@ -767,11 +767,11 @@ var imageButtonMouseOut = event => {
 var imageButtonClick = event => {
     const target = event.currentTarget || event.srcElement;
     if (target.parentNode.className.includes("disabled")) return;
-    target.MaterialToolbar.processAction(target.code);
+    target.pagerControl.processAction(target.code);
 }
 var onPageDropdownChange = event => {
     const target = event.currentTarget || event.srcElement;
-    MaterialToolbar.setPageIndex(parseInt(target.value) - 1);
-    MaterialToolbar.refresh();
+    target.pagerControl.setPageIndex(parseInt(target.value) - 1);
+    target.pagerControl.refresh();
 
 }
