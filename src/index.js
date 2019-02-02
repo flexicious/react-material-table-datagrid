@@ -11,6 +11,9 @@ function App() {
       <MaterialDataGrid
         width={"100%"}
         editable
+        enablePaging
+        enablePreferencePersistence
+        enableExport
         dataProvider={[
           { label: "Company A", state: "NJ", rank: "1.11" },
           { label: "Company B", state: "PA", rank: "11.1" },

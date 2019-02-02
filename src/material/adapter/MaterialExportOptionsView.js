@@ -2,10 +2,14 @@
  * Flexicious
  * Copyright 2011, Flexicious LLC
  */
-import { UIUtils, Constants, UIComponent, ComboBox, ReactDataGrid, ReactDataGridColumn, ToolbarAction } from './LibraryImports'
+import {
+    UIUtils, Constants, UIComponent, ComboBox, ReactDataGrid, ReactDataGridColumn, ToolbarAction
+    , MultiSelectComboBox, ExportOptions, PrintExportOptions, BaseEvent
+} from '../../flexicious'
 import React from 'react'
-import { RadioButton, RadioButtonGroup } from 'material-ui/RadioButton'
-import TextField from 'material-ui/TextField'
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import TextField from '@material-ui/core/TextField'
 /**
  * A ExportOptionsView that which can be used within the filtering/binding infrastructure.
  * @constructor
@@ -16,15 +20,15 @@ export default class MaterialExportOptionsView extends UIComponent {
     constructor() {
         super({}, "div")
         this.attachClass("flexiciousGrid");
-        this.cbxColumns = new flexiciousNmsp.MultiSelectComboBox();
+        this.cbxColumns = new MultiSelectComboBox();
         this.cbxColumns.alwaysVisible = true;
 
-        this.cbxExporters = new flexiciousNmsp.ComboBox();
+        this.cbxExporters = new ComboBox();
         this.cbxExporters.ignoreAllItem = true;
         this.cbxExporters.setAddAllItem(false);
         this.setWidth(500);
 
-        this.exportOptions = new flexiciousNmsp.ExportOptions();
+        this.exportOptions = new ExportOptions();
 
     }
 
@@ -60,7 +64,7 @@ export default class MaterialExportOptionsView extends UIComponent {
 
         const pgFrom = this.pageFrom;
         const pgTo = this.pageTo;
-        if (this.pageSelection == flexiciousNmsp.PrintExportOptions.PRINT_EXPORT_SELECTED_PAGES) {
+        if (this.pageSelection === PrintExportOptions.PRINT_EXPORT_SELECTED_PAGES) {
             if (pgFrom >= 1 && pgTo >= 1 && pgFrom <= (this.pageCount) && pgTo <= (this.pageCount) && pgFrom <= pgTo) {
                 this.exportOptions.pageFrom = pgFrom;
                 this.exportOptions.pageTo = pgTo;
@@ -76,7 +80,7 @@ export default class MaterialExportOptionsView extends UIComponent {
     }
 
     close(dialogResult) {
-        const closeEvent = new flexiciousNmsp.BaseEvent(Constants.EVENT_CLOSE);
+        const closeEvent = new BaseEvent(Constants.EVENT_CLOSE);
         closeEvent.detail = dialogResult;
         this.dispatchEvent(closeEvent);
         this.grid.removePopup(this.popup);
@@ -108,33 +112,33 @@ export default class MaterialExportOptionsView extends UIComponent {
                         : UIUtils.extractPropertyValues(this.availableColumns, "name")}
                     onChange={(evt) => {
                         this.exportOptions.columnsToExport = (evt.grid.getSelectedObjects());
-                        if (this.exportOptions.columnsToExport.length == 1 && this.exportOptions.columnsToExport[0].name == "All") {
+                        if (this.exportOptions.columnsToExport.length === 1 && this.exportOptions.columnsToExport[0].name === "All") {
                             this.exportOptions.columnsToExport = [];
                         }
-                    } }>
+                    }}>
                     <ReactDataGridColumn type={"checkbox"} />
                     <ReactDataGridColumn dataField={"headerText"} headerText={Constants.EXP_LBL_COLS_TO_EXPORT_TEXT} />
                 </ReactDataGrid>
             </div>
             <div key="optionsDiv" className={"options flexiciousGrid"} style={{ float: "right" }}>
-                <RadioButtonGroup name="pageSelection" onChange={(evt, newValue) => { this.pageSelection = newValue; } } defaultSelected={flexiciousNmsp.PrintExportOptions.PRINT_EXPORT_CURRENT_PAGE}>
-                    <RadioButton name="currentPage" label={Constants.EXP_RBN_CURRENT_PAGE_LABEL} className={"flxsExportpaging RBN_CURRENT_PAGE"} value={flexiciousNmsp.PrintExportOptions.PRINT_EXPORT_CURRENT_PAGE} />
-                    <RadioButton name="allPages" label={Constants.EXP_RBN_ALL_PAGES_LABEL} className={"flxsExportpaging RBN_ALL_PAGES"} value={flexiciousNmsp.PrintExportOptions.PRINT_EXPORT_ALL_PAGES} />
-                    <RadioButton disabled={this.selectedObjectsCount == 0} className={"flxsExportpaging rbnSelectedRecords"}
-                        value={flexiciousNmsp.PrintExportOptions.PRINT_EXPORT_SELECTED_RECORDS} label={Constants.SELECTED_RECORDS + " (" + (this.selectedObjectsCount == 0 ? 'None Selected)' : this.selectedObjectsCount + " selected)")} />
-                    <RadioButton name="selectedPage" label={Constants.EXP_RBN_SELECT_PGS_LABEL} className={"flxsExportpaging RBN_SELECT_PGS"}
-                        value={flexiciousNmsp.PrintExportOptions.PRINT_EXPORT_SELECTED_PAGES} />
-                </RadioButtonGroup>
-                <TextField style={{ width: 'auto' }} key="fromPage" name="fromPage" className={"flxsExportpaging txtPageFrom"} onChange={(evt, newValue) => { this.pageTo = newValue; } } />
+                <RadioGroup name="pageSelection" onChange={(evt, newValue) => { this.pageSelection = newValue; }} defaultSelected={PrintExportOptions.PRINT_EXPORT_CURRENT_PAGE}>
+                    <Radio name="currentPage" label={Constants.EXP_RBN_CURRENT_PAGE_LABEL} className={"flxsExportpaging RBN_CURRENT_PAGE"} value={PrintExportOptions.PRINT_EXPORT_CURRENT_PAGE} />
+                    <Radio name="allPages" label={Constants.EXP_RBN_ALL_PAGES_LABEL} className={"flxsExportpaging RBN_ALL_PAGES"} value={PrintExportOptions.PRINT_EXPORT_ALL_PAGES} />
+                    <Radio disabled={this.selectedObjectsCount === 0} className={"flxsExportpaging rbnSelectedRecords"}
+                        value={PrintExportOptions.PRINT_EXPORT_SELECTED_RECORDS} label={Constants.SELECTED_RECORDS + " (" + (this.selectedObjectsCount === 0 ? 'None Selected)' : this.selectedObjectsCount + " selected)")} />
+                    <Radio  name="selectedPage" label={Constants.EXP_RBN_SELECT_PGS_LABEL} className={"flxsExportpaging RBN_SELECT_PGS"}
+                        value={PrintExportOptions.PRINT_EXPORT_SELECTED_PAGES} />
+                </RadioGroup>
+                <TextField style={{ width: 'auto' }} key="fromPage" name="fromPage" className={"flxsExportpaging txtPageFrom"} onChange={(evt, newValue) => { this.pageTo = newValue; }} />
                 <label> {Constants.PGR_TO} </label>
-                <TextField style={{ width: 'auto' }} key="toPage" name="toPage" className={"flxsExportpaging txtPageTo"} onChange={(evt, newValue) => { this.pageFrom = newValue; } } />
+                <TextField style={{ width: 'auto' }} key="toPage" name="toPage" className={"flxsExportpaging txtPageTo"} onChange={(evt, newValue) => { this.pageFrom = newValue; }} />
                 <label>{this.pageCount}</label>
                 <div>
 
                     <label className={"LBL_EXPORT_FORMAT"}> {Constants.EXP_LBL_EXPORT_FORMAT_TEXT}</label>
                     <select defaultValue={this.exportOptions.getExporterName()} onChange={(evt) => {
                         this.exportOptions.exporter = this.exportOptions.exporters[evt.currentTarget.selectedIndex];
-                    } }>
+                    }}>
                         {this.exportOptions.exporters.map((exporter, i) => {
                             return <option key={"option" + i} value={exporter.getName()}>{exporter.getName()}</option>
                         })}
@@ -145,5 +149,4 @@ export default class MaterialExportOptionsView extends UIComponent {
     }
 }
 
-flexiciousNmsp.MaterialExportOptionsView = MaterialExportOptionsView; //add to name space
 MaterialExportOptionsView.prototype.typeName = MaterialExportOptionsView.typeName = 'MaterialExportOptionsView';//for quick inspection

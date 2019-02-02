@@ -4,9 +4,8 @@
  */
 
 import React from 'react'
-import { Constants, ToolbarAction, UIUtils, UIComponent, TriStateCheckBox } from './LibraryImports'
-import { RadioButton, RadioButtonGroup } from 'material-ui/RadioButton'
-import CheckBox from 'material-ui/CheckBox'
+import { Constants, ToolbarAction, UIUtils, UIComponent } from '../../flexicious'
+import { Checkbox } from '@material-ui/core';
 /**
  * A SaveSettingsPopup that which can be used within the filtering/binding infrastructure.
  * @constructor
@@ -39,10 +38,11 @@ export default class MaterialSaveSettingsPopup extends UIComponent {
     }
     setGrid(val) {
         this.grid = val;
+        const grid = this.grid;
         this.preferencesSet = this.grid.preferencesSet;
         this.filtersEnabled = this.grid.getEnableFilters();
         this.preferenceName = this.grid.getCurrentPreferenceInfo() ? grid.getCurrentPreferenceInfo().name : 'Default';
-        this.preferenceIsDefault = this.grid.getCurrentPreferenceInfo() ? (grid.getCurrentPreferenceInfo().name == grid.getGridPreferencesInfo().defaultPreferenceName) : 'Default';
+        this.preferenceIsDefault = this.grid.getCurrentPreferenceInfo() ? (grid.getCurrentPreferenceInfo().name === grid.getGridPreferencesInfo().defaultPreferenceName) : 'Default';
 
     }
 
@@ -86,7 +86,7 @@ export default class MaterialSaveSettingsPopup extends UIComponent {
                 UIUtils.findElementWithClassName(domElementdiv, 'cbDefaultPreference').checked);
         else
             this.grid.persistPreferences();
-        if (this.grid.preferencePersistenceMode != "server")
+        if (this.grid.preferencePersistenceMode !== "server")
             UIUtils.showMessage("Preferences Saved!");
         this.grid.removePopup(this.popup);
 
@@ -98,11 +98,11 @@ export default class MaterialSaveSettingsPopup extends UIComponent {
     render() {
         let prefName = null;
         if (this.grid.enableMultiplePreferences) {
-            <div>
+            return <div>
                 <div style={{ float: 'left' }}><span> {Constants.SAVE_SETTINGS_PREFERENCE_NAME}
                 </span>
                     <input className={"txtPreferenceName"} value={this.preferenceName} />
-                    <CheckBox className={"cbDefaultPreference"} defaultChecked={this.preferenceIsDefault}> Is Default?</CheckBox>
+                    <Checkbox className={"cbDefaultPreference"} defaultChecked={this.preferenceIsDefault}> Is Default?</Checkbox>
                 </div>
                 <div style={{ clear: "both" }} />
             </div>;
@@ -115,23 +115,23 @@ export default class MaterialSaveSettingsPopup extends UIComponent {
                     <tr>
                         <td>
                             <div >
-                                <CheckBox className={"cbPERSIST_COLUMN_ORDER"} defaultChecked={true} label={Constants.SAVE_SETTINGS_ORDER_OF_COLUMNS} />
-                                <CheckBox className={"cbPERSIST_COLUMN_VISIBILITY"} defaultChecked={true} label={Constants.SAVE_SETTINGS_VISIBILITY_OF_COLUMNS} />
-                                <CheckBox className={"cbPERSIST_COLUMN_WIDTH"} defaultChecked={true} label={Constants.SAVE_SETTINGS_WIDTHS_OF_COLUMNS} />
+                                <Checkbox className={"cbPERSIST_COLUMN_ORDER"} defaultChecked={true} label={Constants.SAVE_SETTINGS_ORDER_OF_COLUMNS} />
+                                <Checkbox className={"cbPERSIST_COLUMN_VISIBILITY"} defaultChecked={true} label={Constants.SAVE_SETTINGS_VISIBILITY_OF_COLUMNS} />
+                                <Checkbox className={"cbPERSIST_COLUMN_WIDTH"} defaultChecked={true} label={Constants.SAVE_SETTINGS_WIDTHS_OF_COLUMNS} />
                             </div>
                         </td>
                         <td>
                             <div >
-                                <CheckBox className={"cbPERSIST_FILTER"} defaultChecked={true} label={Constants.SAVE_SETTINGS_FILTER_CRITERIA} />
-                                <CheckBox className={"cbPERSIST_SORT"} defaultChecked={true} label={Constants.SAVE_SETTINGS_SORT_SETTINGS} />
-                                <CheckBox className={"cbPERSIST_SCROLL"} defaultChecked={true} label={Constants.SAVE_SETTINGS_SCROLL_POSITIONS} />
+                                <Checkbox className={"cbPERSIST_FILTER"} defaultChecked={true} label={Constants.SAVE_SETTINGS_FILTER_CRITERIA} />
+                                <Checkbox className={"cbPERSIST_SORT"} defaultChecked={true} label={Constants.SAVE_SETTINGS_SORT_SETTINGS} />
+                                <Checkbox className={"cbPERSIST_SCROLL"} defaultChecked={true} label={Constants.SAVE_SETTINGS_SCROLL_POSITIONS} />
                             </div>
                         </td>
                         <td>
                             <div >
-                                <CheckBox className={"cbPERSIST_FOOTER_FILTER_VISIBILITY"} defaultChecked={true} label={Constants.SAVE_SETTINGS_FILTER_AND_FOOTER_VISIBILITY} /> 
-                                <CheckBox className={"cbPERSIST_PAGE_SIZE"} defaultChecked={true} label={Constants.SAVE_SETTINGS_RECORDS_PER_PAGE} />
-                                <CheckBox className={"cbPERSIST_PRINT_SETTINGS"} defaultChecked={true} label={Constants.SAVE_SETTINGS_PRINT_SETTINGS} />
+                                <Checkbox className={"cbPERSIST_FOOTER_FILTER_VISIBILITY"} defaultChecked={true} label={Constants.SAVE_SETTINGS_FILTER_AND_FOOTER_VISIBILITY} /> 
+                                <Checkbox className={"cbPERSIST_PAGE_SIZE"} defaultChecked={true} label={Constants.SAVE_SETTINGS_RECORDS_PER_PAGE} />
+                                <Checkbox className={"cbPERSIST_PRINT_SETTINGS"} defaultChecked={true} label={Constants.SAVE_SETTINGS_PRINT_SETTINGS} />
                             </div>
                         </td>
                     </tr>
@@ -147,5 +147,4 @@ export default class MaterialSaveSettingsPopup extends UIComponent {
  *
  * @type {Function}
  * */
-flexiciousNmsp.MaterialSaveSettingsPopup = MaterialSaveSettingsPopup; //add to name space
 MaterialSaveSettingsPopup.prototype.typeName = MaterialSaveSettingsPopup.typeName = 'MaterialSaveSettingsPopup';//for quick inspection

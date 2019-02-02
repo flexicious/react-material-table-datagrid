@@ -2,11 +2,10 @@
  * Flexicious
  * Copyright 2011, Flexicious LLC
  */
-import { UIUtils, Constants, UIComponent,  ReactDataGrid, ReactDataGridColumn, ToolbarAction } from './LibraryImports'
+import { UIUtils, Constants, UIComponent,  ReactDataGrid, ReactDataGridColumn, ToolbarAction } from '../../flexicious'
 
 import React from 'react'
-import Checkbox from 'material-ui/Checkbox'
-import TextField from 'material-ui/TextField'
+import { Checkbox, TextField } from '@material-ui/core';
 /**
  * A SettingsPopup that which can be used within the filtering/binding infrastructure.
  * @constructor
@@ -105,7 +104,7 @@ export default class MaterialSettingsPopup extends UIComponent {
         return <div className={"settingsPopup flexiciousPopup"}>
             <div className={"columnsLabel"}>{Constants.SETTINGS_COLUMNS_TO_SHOW}
                 <ReactDataGrid width={"100%"} height={300} dataProvider={this._cols} enableActiveCellHighlight={false}
-                    selectedObjects={(this._cols.length != this._visibleCols.length) ? this._visibleCols : this._cols}
+                    selectedObjects={(this._cols.length !== this._visibleCols.length) ? this._visibleCols : this._cols}
                     onChange={(evt) => { this.selectedColumns = evt.grid.getSelectedObjects() } }>
                     <ReactDataGridColumn type={"checkbox"} />
                     <ReactDataGridColumn dataField={"_headerText"} headerText={Constants.SETTINGS_COLUMNS_TO_SHOW} />
@@ -130,5 +129,4 @@ export default class MaterialSettingsPopup extends UIComponent {
  *
  * @type {Function}
                 */
-flexiciousNmsp.MaterialSettingsPopup = MaterialSettingsPopup; //add to name space
 MaterialSettingsPopup.prototype.typeName = MaterialSettingsPopup.typeName = 'MaterialSettingsPopup';//for quick inspection
