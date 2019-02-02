@@ -1,81 +1,79 @@
 
+import {
+    DialogActions,
+    Dialog, Button
+} from '@material-ui/core';
 import React from 'react';
 import DatePicker from './datepicker/MaterialDatePicker';
 import { UIUtils, ClassFactory } from "../../flexicious"
-import MaterialDialog from "./dialog/MaterialDialog"
+// import MaterialDialog from "./dialog/MaterialDialog"
 import MaterialSettingsPopup from "./MaterialSettingsPopup"
 import MaterialSaveSettingsPopup from "./MaterialSaveSettingsPopup"
 import MaterialExportOptionsView from "./MaterialExportOptionsView"
 
-// class MaterialModal extends React.Component {
-//     constructor() {
-//         super();
-//         this.state = {
-//             open: true,
-//         };
-//         this.runAction = (action) => {
-//             if (action.closeDialog) {
-//                 const result = action.callback(this.refs['child0']);
-//                 if (result === true || result === undefined) {
-//                     this.setState({ open: false });
-//                 }
-//             }
-//         }
-//     }
+class MaterialModal extends React.Component {
+    constructor() {
+        super();
+        this.state = {
+            open: true,
+        };
+        this.runAction = (action) => {
+            if (action.closeDialog) {
+                const result = action.callback(this.refs['child0']);
+                if (result === true || result === undefined) {
+                    this.setState({ open: false });
+                }
+            }
+        }
+    }
 
 
-//     render() {
+    render() {
 
-//         const children = React.Children.map(this.props.children, function (child, index) {
-//             return React.cloneElement(child, {
-//                 ref: 'child' + (index++),
-//                 key: 'child' + (index)
+        const children = React.Children.map(this.props.children, function (child, index) {
+            return React.cloneElement(child, {
+                ref: 'child' + (index++),
+                key: 'child' + (index)
 
-//             });
-//         });
+            });
+        });
 
 
-//         const actions = this.props.actions.map(
-//             (action, index) => {
-//                 return <ParameterizedFlatButton
-//                     key={"actionButton" + index}
-//                     label={action.name}
-//                     primary={true}
-//                     callback={this.runAction}
-//                     arg={action}
-//                 />;
-//             }
-//         );
-//         const customContentStyle = {
-//             width: this.props.width,
-//             height: this.props.height,
-//             maxWidth: 'none',
-//             maxHeight: 'none',
-//         };
-//         return (
-//             <div key="dialogDiv">
-//                 <Dialog
-//                     key="dialog"
-//                     title={this.props.title}
-//                     actions={actions}
-//                     modal={this.props.modal}
-//                     open={this.state.open}
-//                     contentStyle={customContentStyle}
-//                 >
-//                     {children}
-//                 </Dialog>
-//             </div>
-//         );
-//     }
-// }
+        const actions = this.props.actions.map(
+            (action, index) => {
+                return <ParameterizedFlatButton
+                    key={"actionButton" + index}
+                    label={action.name}
+                    primary={true}
+                    callback={this.runAction}
+                    arg={action}
+                />;
+            }
+        );
+        return (
+            <div key="dialogDiv">
+                <Dialog
+                    key="dialog"
+                    title={this.props.title}
+                    actions={actions}
+                    open={this.state.open}
+                >
+                    {children}
 
-// const ParameterizedFlatButton = ({ label, callback, arg }) => {
-//     return <Button
-//         label={label}
-//         primary={true}
-//         onClick={() => { callback(arg) }}
-//     />;
-// }
+                    <DialogActions>
+                        {actions}
+                    </DialogActions>
+                </Dialog>
+            </div>
+        );
+    }
+}
+
+const ParameterizedFlatButton = ({ label, callback, arg }) => {
+    return <Button
+        onClick={() => { callback(arg) }}
+    >{label}</Button>;
+}
 
 
 /**
@@ -94,18 +92,9 @@ export default class MaterialAdapter {
     }
     showDialog(elem, parent, modal, w, h, title, actions) {
 
-        return <MaterialDialog actionControlComponents={actions}
-            onClose={this.handleOnAlertClose}
-            open={true}
-            title={title}
-            showContentWithText={false}
-            bodyComponent={elem}
-            disableBackdropClick
-        >
-        </MaterialDialog>
-        // return <MaterialModal key="modayDialog" actions={actions} title={title} width={w} height={h} modal={modal}>
-        //     {elem}
-        // </MaterialModal>;
+        return <MaterialModal key="modayDialog" actions={actions} title={title} width={w} height={h} modal={modal}>
+            {elem}
+        </MaterialModal>;
     }
 
     createSettingsPopup() {
@@ -121,10 +110,10 @@ export default class MaterialAdapter {
     }
 
     createDateTimePicker(dateFormat, dflt, hintText, ref, onChangeCallBack) {
-        return <DatePicker hintText={hintText} ref={ref} defaultDate={dflt} container="inline" autoOk={true} key={ref} onChange={onChangeCallBack} />
+        return <DatePicker ref={ref} selectedDate={dflt} container="inline" autoOk={true} key={ref} onChange={onChangeCallBack} />
     }
     getDateFromPicker(picker) {
-        return picker.state.date || picker.state.dialogDate;
+        return picker.props.selectedDate || picker.state.date || picker.state.dialogDate;
     }
 
 
