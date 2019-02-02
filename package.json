@@ -10,10 +10,10 @@
   "peerDependencies": {
   },
   "devDependencies": {
-    "moment": "^2.24.0",
-    "@date-io/moment": "^1.0.2",
     "node-sass": "^4.11.0",
     "react-scripts": "2.0.3",    
+    "moment": "^2.24.0",
+    "@date-io/moment": "^1.0.2",
     "@material-ui/core": "^3.7.0",
     "@material-ui/icons": "^3.0.1",
     "material-ui-pickers": "^2.1.2",
