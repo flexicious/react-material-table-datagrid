@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import MaterialDataGrid from "./material/grid/MaterialDataGrid";
 import MaterialDataGridColumn from "./material/grid/MaterialDataGridColumn";
+import MaterialCheckBoxColumn from "./material/grid/MaterialCheckBoxColumn";
 import { Constants, DateRange } from "./flexicious";
 
 
@@ -11,7 +12,6 @@ function App() {
       <h1>Hello World!</h1>
       <MaterialDataGrid
         width={"100%"}
-        editable
         enablePaging
         enablePreferencePersistence
         enableExport
@@ -26,7 +26,7 @@ function App() {
         ]}
       >
 
-        <MaterialDataGridColumn type="checkbox" />
+        <MaterialCheckBoxColumn/>
         <MaterialDataGridColumn dataField="label" filterControl="TextInput" />
         <MaterialDataGridColumn dataField="state" filterControl="MultiSelectComboBox" filterComboBoxBuildFromGrid />
         <MaterialDataGridColumn dataField="rank" sortNumeric filterControl="NumericRangeBox" />
