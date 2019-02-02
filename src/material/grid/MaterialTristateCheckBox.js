@@ -4,16 +4,12 @@ import React from 'react';
 
 export default class MaterialTristateCheckBox extends TriStateCheckBox {
     render() {
-        let cb;
-        {
-            cb = this.getMiddle() ? this.getEnabled() ?
-                <Checkbox indeterminate checked={false}/> : <Checkbox checked={false} indeterminate disabled /> :
-                this.getEnabled() ? this.getSelected() ?
-                    <Checkbox checked /> : <Checkbox checked={false}/> :
-                    this.getSelected() ?
-                        <Checkbox checked disabled /> : <Checkbox disabled checked={false}/>;
-        }
-
+        const cb = this.getMiddle() ? this.getEnabled() ?
+            <Checkbox indeterminate checked={false} /> : <Checkbox checked={false} indeterminate disabled /> :
+            this.getEnabled() ? this.getSelected() ?
+                <Checkbox checked /> : <Checkbox checked={false} /> :
+                this.getSelected() ?
+                    <Checkbox checked disabled /> : <Checkbox disabled checked={false} />;
         this.setAttribute("className", "")
         this.children = [cb];
         return super.render();
