@@ -25,6 +25,8 @@ function App() {
           { label: "Company E", state: "NJ", rank: "22.2", date: new Date(2019, 2, 10) }
         ]}
       >
+
+        <MaterialDataGridColumn type="checkbox" />
         <MaterialDataGridColumn dataField="label" filterControl="TextInput" />
         <MaterialDataGridColumn dataField="state" filterControl="MultiSelectComboBox" filterComboBoxBuildFromGrid />
         <MaterialDataGridColumn dataField="rank" sortNumeric filterControl="NumericRangeBox" />

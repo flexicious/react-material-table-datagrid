@@ -99,7 +99,9 @@ export default class MaterialSettingsPopup extends UIComponent {
         this.popup = UIUtils.addPopUp(this.render(), this.grid, false, null, Constants.SETTINGS_POPUP_TITLE, actions);
         this.grid.addPopup(this.popup);
     }
-
+    getHeaderText(item){
+return item.getUniqueIdentifier();
+    }
     render() {
         return <div className={"settingsPopup flexiciousPopup"}>
             <div className={"columnsLabel"}>{Constants.SETTINGS_COLUMNS_TO_SHOW}
@@ -107,7 +109,9 @@ export default class MaterialSettingsPopup extends UIComponent {
                     selectedObjects={(this._cols.length !== this._visibleCols.length) ? this._visibleCols : this._cols}
                     onChange={(evt) => { this.selectedColumns = evt.grid.getSelectedObjects() } }>
                     <ReactDataGridColumn type={"checkbox"} />
-                    <ReactDataGridColumn dataField={"_headerText"} headerText={Constants.SETTINGS_COLUMNS_TO_SHOW} />
+                    <ReactDataGridColumn dataField={"uniqueIdentifier"}
+                    labelFunction={this.getHeaderText}
+                     headerText={Constants.SETTINGS_COLUMNS_TO_SHOW} />
                 </ReactDataGrid>
             </div>
             <div className={"options"}>
