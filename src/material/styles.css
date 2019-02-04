@@ -401,6 +401,11 @@
   border-bottom: solid 1px #cccccc;
 }
 
+.flexiciousGrid .multiSelectComboBoxPopup .materialCheckBoxRow{
+  display: block;
+  border-bottom: solid 1px #cccccc;
+  user-select: none
+}
 .flexiciousGrid .multiSelectComboBoxPopup .okCancelDiv{
   display:block;
   margin: 12px;

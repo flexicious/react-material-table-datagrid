@@ -26,11 +26,11 @@ export default class MaterialTristateCheckBox extends TriStateCheckBox {
     }
     determineCheckBox() {
         const cb = this.getMiddle() ? this.getEnabled() ?
-            <Checkbox indeterminate checked={false} /> : <Checkbox checked={false} indeterminate disabled /> :
+            <Checkbox key="cb" indeterminate checked={false} /> : <Checkbox key="cb" checked={false} indeterminate disabled /> :
             this.getEnabled() ? this.getSelected() ?
-                <Checkbox checked /> : <Checkbox checked={false} /> :
+                <Checkbox key="cb" checked /> : <Checkbox key="cb" checked={false} /> :
                 this.getSelected() ?
-                    <Checkbox checked disabled /> : <Checkbox disabled checked={false} />;
+                    <Checkbox key="cb" checked disabled /> : <Checkbox key="cb" disabled checked={false} />;
 
         this.setAttribute("className", "")
         this.children = [cb];
