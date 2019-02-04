@@ -4,7 +4,10 @@
  */
 
 import React from 'react'
-import { Constants, ToolbarAction, UIUtils, UIComponent } from '../../flexicious'
+import { Constants, ToolbarAction, UIUtils, UIComponent } from '../../flexicious';
+import FormControl from '@material-ui/core/FormControl';
+import FormGroup from '@material-ui/core/FormGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { Checkbox } from '@material-ui/core';
 /**
  * A SaveSettingsPopup that which can be used within the filtering/binding infrastructure.
@@ -16,7 +19,7 @@ export default class MaterialSaveSettingsPopup extends UIComponent {
     constructor() {
         super({}, "div")
         this.attachClass("flexiciousGrid");
-        this.setWidth(600);
+        this.setWidth(800);
         this.setHeight(145);
     }
 
@@ -110,28 +113,58 @@ export default class MaterialSaveSettingsPopup extends UIComponent {
         }
         return <div>
             {prefName}
-            <table style={{ width: "700px" }}>
+            <table style={{ width: "800px" }}>
                 <tbody>
                     <tr>
                         <td>
                             <div >
-                                <Checkbox className={"cbPERSIST_COLUMN_ORDER"} defaultChecked={true} label={Constants.SAVE_SETTINGS_ORDER_OF_COLUMNS} />
-                                <Checkbox className={"cbPERSIST_COLUMN_VISIBILITY"} defaultChecked={true} label={Constants.SAVE_SETTINGS_VISIBILITY_OF_COLUMNS} />
-                                <Checkbox className={"cbPERSIST_COLUMN_WIDTH"} defaultChecked={true} label={Constants.SAVE_SETTINGS_WIDTHS_OF_COLUMNS} />
+                                <FormControl>
+                                    <FormGroup>
+                                        <FormControlLabel
+                                            control={<Checkbox className={"cbPERSIST_COLUMN_ORDER"} defaultChecked={true} />}
+                                            label={Constants.SAVE_SETTINGS_ORDER_OF_COLUMNS} />
+                                        <FormControlLabel
+                                            control={<Checkbox className={"cbPERSIST_COLUMN_VISIBILITY"} defaultChecked={true} />}
+                                            label={Constants.SAVE_SETTINGS_VISIBILITY_OF_COLUMNS} />
+                                        <FormControlLabel
+                                            control={<Checkbox className={"cbPERSIST_COLUMN_WIDTH"} defaultChecked={true} />}
+                                            label={Constants.SAVE_SETTINGS_WIDTHS_OF_COLUMNS} />
+                                    </FormGroup>
+                                </FormControl>
                             </div>
                         </td>
                         <td>
                             <div >
-                                <Checkbox className={"cbPERSIST_FILTER"} defaultChecked={true} label={Constants.SAVE_SETTINGS_FILTER_CRITERIA} />
-                                <Checkbox className={"cbPERSIST_SORT"} defaultChecked={true} label={Constants.SAVE_SETTINGS_SORT_SETTINGS} />
-                                <Checkbox className={"cbPERSIST_SCROLL"} defaultChecked={true} label={Constants.SAVE_SETTINGS_SCROLL_POSITIONS} />
+                            <FormControl>
+                                    <FormGroup>
+                                        <FormControlLabel
+                                            control={<Checkbox className={"cbPERSIST_FILTER"} defaultChecked={true} />}
+                                            label={Constants.SAVE_SETTINGS_FILTER_CRITERIA}/>
+                                        <FormControlLabel
+                                            control={<Checkbox className={"cbPERSIST_SORT"} defaultChecked={true} />}
+                                            label={Constants.SAVE_SETTINGS_SORT_SETTINGS}  />
+                                        <FormControlLabel
+                                            control={<Checkbox className={"cbPERSIST_SCROLL"} defaultChecked={true} />}
+                                            label={Constants.SAVE_SETTINGS_SCROLL_POSITIONS} />
+                                    </FormGroup>
+                                </FormControl>
                             </div>
                         </td>
                         <td>
                             <div >
-                                <Checkbox className={"cbPERSIST_FOOTER_FILTER_VISIBILITY"} defaultChecked={true} label={Constants.SAVE_SETTINGS_FILTER_AND_FOOTER_VISIBILITY} /> 
-                                <Checkbox className={"cbPERSIST_PAGE_SIZE"} defaultChecked={true} label={Constants.SAVE_SETTINGS_RECORDS_PER_PAGE} />
-                                <Checkbox className={"cbPERSIST_PRINT_SETTINGS"} defaultChecked={true} label={Constants.SAVE_SETTINGS_PRINT_SETTINGS} />
+                            <FormControl>
+                                    <FormGroup>
+                                        <FormControlLabel
+                                            control={<Checkbox className={"cbPERSIST_FOOTER_FILTER_VISIBILITY"} defaultChecked={true} />}
+                                            label={Constants.SAVE_SETTINGS_FILTER_AND_FOOTER_VISIBILITY}/>
+                                        <FormControlLabel
+                                            control={<Checkbox className={"cbPERSIST_PAGE_SIZE"} defaultChecked={true} />}
+                                            label={Constants.SAVE_SETTINGS_RECORDS_PER_PAGE} />
+                                        <FormControlLabel
+                                            control={<Checkbox className={"cbPERSIST_PRINT_SETTINGS"} defaultChecked={true} />}
+                                            label={Constants.SAVE_SETTINGS_PRINT_SETTINGS} />
+                                    </FormGroup>
+                                </FormControl>
                             </div>
                         </td>
                     </tr>

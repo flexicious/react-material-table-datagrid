@@ -2,10 +2,13 @@
  * Flexicious
  * Copyright 2011, Flexicious LLC
  */
-import { UIUtils, Constants, UIComponent,  ReactDataGrid, ReactDataGridColumn, ToolbarAction } from '../../flexicious'
+import { UIUtils, Constants, UIComponent, ReactDataGrid, ReactDataGridColumn, ToolbarAction } from '../../flexicious'
 
 import React from 'react'
 import { Checkbox, TextField } from '@material-ui/core';
+import FormControl from '@material-ui/core/FormControl';
+import FormGroup from '@material-ui/core/FormGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 /**
  * A SettingsPopup that which can be used within the filtering/binding infrastructure.
  * @constructor
@@ -99,30 +102,39 @@ export default class MaterialSettingsPopup extends UIComponent {
         this.popup = UIUtils.addPopUp(this.render(), this.grid, false, null, Constants.SETTINGS_POPUP_TITLE, actions);
         this.grid.addPopup(this.popup);
     }
-    getHeaderText(item){
-return item.getUniqueIdentifier();
+    getHeaderText(item) {
+        return item.getUniqueIdentifier();
     }
     render() {
         return <div className={"settingsPopup flexiciousPopup"}>
-            <div className={"columnsLabel"}>{Constants.SETTINGS_COLUMNS_TO_SHOW}
+        <div className={"labelSize"}>Settings:</div>
+            <div className={"gridExport"}>{Constants.SETTINGS_COLUMNS_TO_SHOW}
                 <ReactDataGrid width={"100%"} height={300} dataProvider={this._cols} enableActiveCellHighlight={false}
                     selectedObjects={(this._cols.length !== this._visibleCols.length) ? this._visibleCols : this._cols}
-                    onChange={(evt) => { this.selectedColumns = evt.grid.getSelectedObjects() } }>
+                    onChange={(evt) => { this.selectedColumns = evt.grid.getSelectedObjects() }}>
                     <ReactDataGridColumn type={"checkbox"} />
                     <ReactDataGridColumn dataField={"uniqueIdentifier"}
-                    labelFunction={this.getHeaderText}
-                     headerText={Constants.SETTINGS_COLUMNS_TO_SHOW} />
+                        labelFunction={this.getHeaderText}
+                        headerText={Constants.SETTINGS_COLUMNS_TO_SHOW} />
                 </ReactDataGrid>
             </div>
-            <div className={"options"}>
-                <Checkbox className={"cbFooter"} defaultChecked={this._footerVisible} style={this._enableFooters ? {} : { "visibility": "hidden" }}
-                    onChange={(evt, newValue) => { this._footerVisible = newValue } } label={Constants.SETTINGS_SHOW_FOOTERS} />
-                <Checkbox className={"cbFilters"} defaultChecked={this._filterVisible} style={this._enableFilters ? {} : { "visibility": "hidden" }}
-                    onChange={(evt, newValue) => { this._filterVisible = newValue } } label={Constants.SETTINGS_SHOW_FILTER} />
-                <div>
+            <div className={"options"}>\
+            <FormControl className={"labelSize"}>
+                    <FormGroup>
+                        <FormControlLabel
+                            control={<Checkbox className={"cbFooter"} defaultChecked={this._footerVisible} style={this._enableFooters ? {} : { "visibility": "hidden" }}
+                                onChange={(evt, newValue) => { this._footerVisible = newValue }} />}
+                            label={Constants.SETTINGS_SHOW_FOOTERS} />
+                        <FormControlLabel
+                            control={<Checkbox className={"cbFilters"} defaultChecked={this._filterVisible} style={this._enableFilters ? {} : { "visibility": "hidden" }}
+                                onChange={(evt, newValue) => { this._filterVisible = newValue }} />}
+                            label={Constants.SETTINGS_SHOW_FILTER} />
+                    </FormGroup>
+                </FormControl>
+                <div className={"labelSize"}>
                     <span>{Constants.SETTINGS_RECORDS_PER_PAGE + "  "}</span>
                     <TextField name="perPage" style={{ width: 'auto' }} className={"txtPageSize"} defaultValue={this._pageSize || 50}
-                        onChange={(evt) => { this._pageSize = parseInt(evt.currentTarget.value) } } />
+                        onChange={(evt) => { this._pageSize = parseInt(evt.currentTarget.value) }} />
                 </div>
             </div>
         </div>;

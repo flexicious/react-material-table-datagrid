@@ -9,7 +9,9 @@ import {
 import React from 'react'
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
-import TextField from '@material-ui/core/TextField'
+import TextField from '@material-ui/core/TextField';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormControl from '@material-ui/core/FormControl';
 /**
  * A ExportOptionsView that which can be used within the filtering/binding infrastructure.
  * @constructor
@@ -26,7 +28,7 @@ export default class MaterialExportOptionsView extends UIComponent {
         this.cbxExporters = new ComboBox();
         this.cbxExporters.ignoreAllItem = true;
         this.cbxExporters.setAddAllItem(false);
-        this.setWidth(500);
+        this.setWidth(800);
 
         this.exportOptions = new ExportOptions();
 
@@ -104,8 +106,9 @@ export default class MaterialExportOptionsView extends UIComponent {
      * Initializes the auto complete and watermark plugins
      */
     render() {
-        return <div key="exportdiv">
-            <div key="columnsDiv" className={"columnsLabel"} style={{ float: "left" }}>{Constants.EXP_LBL_COLS_TO_EXPORT_TEXT}
+        return <div key="exportdiv" className={"formExport"}>
+                <div className={"HeaderText"}>Settings</div>
+            <div key="columnsDiv" className={"columnsLabel listExport"} >{Constants.EXP_LBL_COLS_TO_EXPORT_TEXT}
 
                 <ReactDataGrid key="columnsGrid" width={300} height={300} selectedKeyField={"name"} dataProvider={this.exportOptions.availableColumns} enableActiveCellHighlight={false}
                     selectedKeys={this.itemsToShow.length ? UIUtils.extractPropertyValues(this.itemsToShow, "uniqueIdentifier")
@@ -120,20 +123,33 @@ export default class MaterialExportOptionsView extends UIComponent {
                     <ReactDataGridColumn dataField={"headerText"} headerText={Constants.EXP_LBL_COLS_TO_EXPORT_TEXT} />
                 </ReactDataGrid>
             </div>
-            <div key="optionsDiv" className={"options flexiciousGrid"} style={{ float: "right" }}>
-                <RadioGroup name="pageSelection" onChange={(evt, newValue) => { this.pageSelection = newValue; }} defaultSelected={PrintExportOptions.PRINT_EXPORT_CURRENT_PAGE}>
-                    <Radio name="currentPage" label={Constants.EXP_RBN_CURRENT_PAGE_LABEL} className={"flxsExportpaging RBN_CURRENT_PAGE"} value={PrintExportOptions.PRINT_EXPORT_CURRENT_PAGE} />
-                    <Radio name="allPages" label={Constants.EXP_RBN_ALL_PAGES_LABEL} className={"flxsExportpaging RBN_ALL_PAGES"} value={PrintExportOptions.PRINT_EXPORT_ALL_PAGES} />
-                    <Radio disabled={this.selectedObjectsCount === 0} className={"flxsExportpaging rbnSelectedRecords"}
-                        value={PrintExportOptions.PRINT_EXPORT_SELECTED_RECORDS} label={Constants.SELECTED_RECORDS + " (" + (this.selectedObjectsCount === 0 ? 'None Selected)' : this.selectedObjectsCount + " selected)")} />
-                    <Radio  name="selectedPage" label={Constants.EXP_RBN_SELECT_PGS_LABEL} className={"flxsExportpaging RBN_SELECT_PGS"}
-                        value={PrintExportOptions.PRINT_EXPORT_SELECTED_PAGES} />
-                </RadioGroup>
-                <TextField style={{ width: 'auto' }} key="fromPage" name="fromPage" className={"flxsExportpaging txtPageFrom"} onChange={(evt, newValue) => { this.pageTo = newValue; }} />
+            <div key="optionsDiv" className={"options flexiciousGrid radioExport"}>
+                <FormControl >
+                    <RadioGroup name="pageSelection" onChange={(evt, newValue) => { this.pageSelection = newValue; }} defaultSelected={PrintExportOptions.PRINT_EXPORT_CURRENT_PAGE}>
+                        <FormControlLabel
+                            value={PrintExportOptions.PRINT_EXPORT_CURRENT_PAGE}
+                            control={<Radio name="currentPage" className={"flxsExportpaging RBN_CURRENT_PAGE"} />}
+                            label={Constants.EXP_RBN_CURRENT_PAGE_LABEL} />
+                        <FormControlLabel
+                            value={PrintExportOptions.PRINT_EXPORT_ALL_PAGES}
+                            control={<Radio name="allPages" className={"flxsExportpaging RBN_ALL_PAGES"} />}
+                            label={Constants.EXP_RBN_ALL_PAGES_LABEL} />
+                        <FormControlLabel
+                            value={PrintExportOptions.PRINT_EXPORT_SELECTED_RECORDS}
+                            control={<Radio disabled={this.selectedObjectsCount === 0} className={"flxsExportpaging rbnSelectedRecords"} />}
+                            label={Constants.SELECTED_RECORDS + " (" + (this.selectedObjectsCount === 0 ? 'None Selected)' : this.selectedObjectsCount + " selected)")} />
+                        <FormControlLabel
+                            value={PrintExportOptions.PRINT_EXPORT_SELECTED_PAGES}
+                            control={<Radio name="selectedPage" className={"flxsExportpaging RBN_SELECT_PGS"} />}
+                            label={Constants.EXP_RBN_SELECT_PGS_LABEL} />
+                    </RadioGroup>
+                </FormControl>
+                
+                <TextField  key="fromPage" name="fromPage" className={"flxsExportpaging txtPage"} onChange={(evt, newValue) => { this.pageTo = newValue; }} />
                 <label> {Constants.PGR_TO} </label>
-                <TextField style={{ width: 'auto' }} key="toPage" name="toPage" className={"flxsExportpaging txtPageTo"} onChange={(evt, newValue) => { this.pageFrom = newValue; }} />
+                <TextField  key="toPage" name="toPage" className={"flxsExportpaging txtPage"} onChange={(evt, newValue) => { this.pageFrom = newValue; }} />
                 <label>{this.pageCount}</label>
-                <div>
+                <div style={{margin: '5px'}}>
 
                     <label className={"LBL_EXPORT_FORMAT"}> {Constants.EXP_LBL_EXPORT_FORMAT_TEXT}</label>
                     <select defaultValue={this.exportOptions.getExporterName()} onChange={(evt) => {
