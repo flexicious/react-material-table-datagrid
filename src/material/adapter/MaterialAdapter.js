@@ -4,7 +4,7 @@ import {
     Dialog, Button
 } from '@material-ui/core';
 import React from 'react';
-import DatePicker from './datepicker/MaterialDatePicker';
+import MaterialDatePicker from './datepicker/MaterialDatePicker';
 import { UIUtils, ClassFactory } from "../../flexicious"
 // import MaterialDialog from "./dialog/MaterialDialog"
 import MaterialSettingsPopup from "./MaterialSettingsPopup"
@@ -74,7 +74,24 @@ const ParameterizedFlatButton = ({ label, callback, arg }) => {
         onClick={() => { callback(arg) }}
     >{label}</Button>;
 }
-
+class MaterialDatePickerWrapper extends React.Component {
+    constructor() {
+        super();
+        this.state = {
+            selectedDate: null,
+        };
+        this.onDateChange = this.onDateChange.bind(this);
+    }
+    onDateChange(newDate){
+        this.setState({
+            selectedDate: newDate
+        })
+ 
+    }
+    render(){
+        return <MaterialDatePicker {...this.props} onDateChange={this.onDateChange}/>
+    }
+}
 
 /**
  * A utility class that maps utility functions from Flexicious into JQuery
@@ -110,10 +127,10 @@ export default class MaterialAdapter {
     }
 
     createDateTimePicker(dateFormat, dflt, hintText, ref, onChangeCallBack) {
-        return <DatePicker ref={ref} selectedDate={dflt} container="inline" autoOk={true} key={ref} onChange={onChangeCallBack} />
+        return <MaterialDatePickerWrapper ref={ref} selectedDate={dflt} container="inline" autoOk={true} key={ref}  />
     }
     getDateFromPicker(picker) {
-        return picker.props.selectedDate || picker.state.date || picker.state.dialogDate;
+        return picker.state.selectedDate || picker.props.selectedDate;
     }
 
 
@@ -155,6 +172,7 @@ MaterialAdapter.prototype.typeName = MaterialAdapter.typeName = "MaterialAdapter
 MaterialAdapter.prototype.ieVersion = -1;
 MaterialAdapter.toastCount = 0;
 UIUtils.adapter = new MaterialAdapter();
+
 
 /*
 Copyright (c) 2013 Jad Joubran
