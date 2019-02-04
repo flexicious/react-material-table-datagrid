@@ -115,6 +115,10 @@
   user-select:none;
 }
 
+.flexiciousGrid .imageButtonSize{
+  padding: 2px;
+}
+
 .flexiciousGrid td{
   cursor:default;
 }
