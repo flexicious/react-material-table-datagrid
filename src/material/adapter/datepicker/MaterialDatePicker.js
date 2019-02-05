@@ -16,12 +16,14 @@ type ColorType =
 type Props = {
     color: ColorType,
     classes: Object,
+    label: string,
     selectedDate?: Date,
     onDateChange: (date: Date) => any,
 }
 
 const styles = theme => ({
     contrastScheme: {
+        margin: 10,
         '& label': {
             color: `${theme.palette.primary.contrastText} !important`
         },
@@ -39,6 +41,7 @@ const styles = theme => ({
         },
     },
     primaryScheme: {
+        margin: 10,
         '& label': {
             color: `${theme.palette.primary.main} !important`
         },
@@ -119,6 +122,7 @@ class MaterialDatePicker extends React.PureComponent<Props> {
             selectedDate,
             classes, 
             color,
+            label,
             ...more 
         } = this.props;
         const { selected } = this.state;
@@ -127,6 +131,7 @@ class MaterialDatePicker extends React.PureComponent<Props> {
             <MuiPickersUtilsProvider utils={DateUtils}>
                 <InlineDatePicker
                     color='primary'
+                    label={label}
                     value={ selected }
                     onChange={w => this.handleOnChange(w.toDate())}
                     className={classNames({

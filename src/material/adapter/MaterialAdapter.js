@@ -127,7 +127,7 @@ export default class MaterialAdapter {
     }
 
     createDateTimePicker(dateFormat, dflt, hintText, ref, onChangeCallBack) {
-        return <MaterialDatePickerWrapper ref={ref} selectedDate={dflt} container="inline" autoOk={true} key={ref}  />
+        return <MaterialDatePickerWrapper ref={ref} selectedDate={dflt} container="inline" autoOk={true} key={ref} label={hintText} />
     }
     getDateFromPicker(picker) {
         return picker.state.selectedDate || picker.props.selectedDate;
