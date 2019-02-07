@@ -4,6 +4,9 @@ import MaterialAdapter from "../adapter/MaterialAdapter"
 import { UIUtils, FlexDataGridColumnLevel, ClassFactory } from "../../flexicious"
 import MaterialToolbar from "../adapter/toolbar/MaterialToolbar"
 import MaterialMultiSelectComboBox from "./MaterialMultiSelectComboBox"
+import MaterialComboBox from "./MaterialComboBox"
+import MaterialDateComboBox from "./MaterialDateComboBox"
+
 
 
 UIUtils.adapter = new MaterialAdapter();
@@ -18,10 +21,18 @@ export default class MaterialDataGrid extends ReactDataGrid {
         let attrName = direct ? attr : attr.name;
         let val = direct ? node : node.attributes.getNamedItem(attrName).value;
 
-        if (attrName === "filterControl" && val === "MultiSelectComboBox") {
-            //we automatically swap this out for a filter control
-            attr = "filterRenderer";
-            node = new ClassFactory(MaterialMultiSelectComboBox);
+        if (attrName === "filterControl") {
+            //we automatically swap this out for a material filter control
+            if (val === "MultiSelectComboBox") {
+                attr = "filterRenderer";
+                node = new ClassFactory(MaterialMultiSelectComboBox);
+            } else if (val === "ComboBox") {
+                attr = "filterRenderer";
+                node = new ClassFactory(MaterialComboBox);
+            } else if (val === "DateComboBox") {
+                attr = "filterRenderer";
+                node = new ClassFactory(MaterialDateComboBox);
+            }
         }
 
         super.applyAttribute(target, attr, node, direct);
