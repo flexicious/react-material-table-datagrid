@@ -415,8 +415,8 @@ export default class MaterialToolbar extends UIComponent {
                 topLevelToolbarButtons.push(
                     <span key="3">
                         <span key={gridId + "btnSettings"} id={gridId + "btnSettings"} className={"pagerDiv  iconCell"}>
-                            <IconButton style={{ width: "40px", height: "40px" }}>
-                                <Settings className={"imageButtonSettings"}>{Constants.PGR_BTN_SETTINGS_TOOLTIP}</Settings>
+                            <IconButton style={{ width: "40px", height: "40px" }} title={Constants.PGR_BTN_SETTINGS_TOOLTIP}>
+                                <Settings className={"imageButtonSettings"}>{}</Settings>
                                 {/* <img tabIndex={0} src={this.grid.getThemeToolbarIconFolder() + "/settings.png"} 
                             className={"imageButtonSettings"}
                                 alt={Constants.PGR_BTN_SETTINGS_TOOLTIP} title={Constants.PGR_BTN_SETTINGS_TOOLTIP} /> */}
@@ -428,8 +428,8 @@ export default class MaterialToolbar extends UIComponent {
                     topLevelToolbarButtons.push(
                         <span key="4">
                             <span key={gridId + "btnSettings"} id={gridId + "btnSettings"} className={"pagerDiv  iconCell"}>
-                                <IconButton style={{ width: "40px", height: "40px" }}>
-                                    <Settings className={"imageButtonOpenSettings"}>{Constants.PGR_BTN_OPEN_SETTINGS_TOOLTIP}</Settings>
+                                <IconButton style={{ width: "40px", height: "40px" }} title={Constants.PGR_BTN_OPEN_SETTINGS_TOOLTIP}>
+                                    <Settings className={"imageButtonOpenSettings"}>{}</Settings>
                                 </IconButton>
                             </span>
                         </span>
@@ -439,9 +439,9 @@ export default class MaterialToolbar extends UIComponent {
                 topLevelToolbarButtons.push(
                     <span key="5">
                         <span key={gridId + "btnSaveSettings"} id={gridId + "btnSaveSettings"} className={"pagerDiv  iconCell"}>
-                            <IconButton style={{ width: "40px", height: "40px" }}>
+                            <IconButton style={{ width: "40px", height: "40px" }} title={Constants.PGR_BTN_SAVE_SETTINGS_TOOLTIP}>
                                 <SettingsApplications className={"imageButtonSaveSettings"}>
-                                    {Constants.PGR_BTN_SAVE_SETTINGS_TOOLTIP}
+                                    {}
                                 </SettingsApplications>
                             </IconButton>
                         </span>
@@ -454,10 +454,8 @@ export default class MaterialToolbar extends UIComponent {
                 topLevelToolbarButtons.push(
                     <span key="6">
                         <span key={gridId + "btnFilterShowHide"} id={gridId + "btnFilterShowHide"} className={"pagerDiv  iconCell"}>
-                            <IconButton style={{ width: "40px", height: "40px" }}>
-                                <FilterList className={"imageButtonFilterShowHide"}>
-                                    {Constants.PGR_BTN_FILTER_TOOLTIP}
-                                </FilterList>
+                            <IconButton style={{ width: "40px", height: "40px" }} title={Constants.PGR_BTN_FILTER_TOOLTIP}>
+                                <FilterList className={"imageButtonFilterShowHide"}/>
                             </IconButton>
                         </span>
                     </span>
@@ -465,10 +463,8 @@ export default class MaterialToolbar extends UIComponent {
                 topLevelToolbarButtons.push(
                     <span key="7">
                         <span key={gridId + "btnFilter"} id={gridId + "btnFilter"} className={"pagerDiv  iconCell"}>                            
-                            <IconButton style={{ width: "40px", height: "40px" }}>
-                                <Sync className={"imageButtonFilter"}>
-                                    {Constants.PGR_BTN_RUN_FILTER_TOOLTIP}
-                                </Sync>
+                            <IconButton style={{ width: "40px", height: "40px" }} title={Constants.PGR_BTN_RUN_FILTER_TOOLTIP}>
+                                <Sync className={"imageButtonFilter"}/>
                             </IconButton>
                         </span>
                     </span>
@@ -477,10 +473,8 @@ export default class MaterialToolbar extends UIComponent {
                     <span key="8">
                         <span key={gridId + "btnClearFilter"} id={gridId + "btnClearFilter"} className={"pagerDiv  iconCell"}>
                            
-                            <IconButton style={{ width: "40px", height: "40px" }}>
-                                <ClearAll className={"imageButtonClearFilter"}>
-                                    {Constants.PGR_BTN_CLEAR_FILTER_TOOLTIP}
-                                </ClearAll>
+                            <IconButton style={{ width: "40px", height: "40px" }} title={Constants.PGR_BTN_CLEAR_FILTER_TOOLTIP}>
+                                <ClearAll className={"imageButtonClearFilter"}/>
                             </IconButton>
                         </span>
                         <span key={gridId + "linesep" + linesep++} className={"pagerDiv lineSep"}>&nbsp;</span>
@@ -532,10 +526,8 @@ export default class MaterialToolbar extends UIComponent {
                 topLevelToolbarButtons.push(
                     <span key="12">
                         <span key={gridId + "btnExcel"} id={gridId + "btnExcel"} className={"pagerDiv  iconCell"}>
-                            <IconButton style={{ width: "40px", height: "40px" }}>
-                                <GetApp className={"imageButtonExcel"}>
-                                    {Constants.PGR_BTN_EXCEL_TOOLTIP}
-                                </GetApp>
+                            <IconButton style={{ width: "40px", height: "40px" }} title={Constants.PGR_BTN_EXCEL_TOOLTIP}>
+                                <GetApp className={"imageButtonExcel"}/>
                             </IconButton>
                         </span>
                     </span>);
