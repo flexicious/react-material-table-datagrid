@@ -23,7 +23,7 @@
 .flexiciousGridPager .toolbarButtonIconCell {
   cursor: pointer;
 }
-.flexiciousGridPager .iconCell{
+/* .flexiciousGridPager .iconCell{
   margin: 1px;
   padding: 1px;
   border-radius: 4px;
@@ -63,7 +63,7 @@
   background: #afafaf;
   border: solid 1px #213E5F;
   cursor: default;
-}
+} */
 .flexiciousGridPager .disabled{
   cursor: not-allowed;
 

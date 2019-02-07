@@ -3,7 +3,10 @@
  * Copyright 2011, Flexicious LLC
  */
 import React from 'react';
-import { SkipPrevious, SkipNext, ArrowLeft, ArrowRight } from '@material-ui/icons';
+import {
+    SkipPrevious, SkipNext, ArrowLeft, ArrowRight,
+    Settings, SettingsApplications, FilterList, Sync, ClearAll, GetApp
+} from '@material-ui/icons';
 import IconButton from '@material-ui/core/IconButton';
 import { UIUtils, Constants, UIComponent, FlexDataGridEvent, ExtendedFilterPageSortChangeEvent, FlexDataGrid } from "../../../flexicious"
 
@@ -361,31 +364,31 @@ export default class MaterialToolbar extends UIComponent {
                 topLevelToolbarButtons.push(
                     <span key="1">
                         <span key={gridId + "btnCollapseOne"} id={gridId + "btnCollapseOne"} className={"pagerDiv  iconCell"}>
-                        <IconButton className={"imageButtonSize"}>
-                            <img tabIndex={0} src={this.grid.getThemeToolbarIconFolder() + "/collapseOne.png"} className={"imageButtonExpandUp"}
-                                alt={Constants.PGR_BTN_EXP_ONE_UP_TOOLTIP} title={Constants.PGR_BTN_EXP_ONE_UP_TOOLTIP} />
-                        </IconButton>
+                            <IconButton className={"imageButtonSize"}>
+                                <img tabIndex={0} src={this.grid.getThemeToolbarIconFolder() + "/collapseOne.png"} className={"imageButtonExpandUp"}
+                                    alt={Constants.PGR_BTN_EXP_ONE_UP_TOOLTIP} title={Constants.PGR_BTN_EXP_ONE_UP_TOOLTIP} />
+                            </IconButton>
                         </span>
 
                         <span key={gridId + "btnExpandOne"} id={gridId + "btnExpandOne"} className={"pagerDiv  iconCell"}>
-                        <IconButton className={"imageButtonSize"}>
-                            <img tabIndex={0} src={this.grid.getThemeToolbarIconFolder() + "/expandOne.png"} className={"imageButtonExpandDown"}
-                                alt={Constants.PGR_BTN_EXP_ONE_DOWN_TOOLTIP} title={Constants.PGR_BTN_EXP_ONE_DOWN_TOOLTIP} />
-                        </IconButton>
+                            <IconButton className={"imageButtonSize"}>
+                                <img tabIndex={0} src={this.grid.getThemeToolbarIconFolder() + "/expandOne.png"} className={"imageButtonExpandDown"}
+                                    alt={Constants.PGR_BTN_EXP_ONE_DOWN_TOOLTIP} title={Constants.PGR_BTN_EXP_ONE_DOWN_TOOLTIP} />
+                            </IconButton>
                         </span>
                         <span className={"pagerDiv lineSep"}>&nbsp;</span>
                         <span key={gridId + "btnCollapseAll"} id={gridId + "btnCollapseAll"} className={"pagerDiv  iconCell"}>
-                        <IconButton className={"imageButtonSize"}>
-                            <img tabIndex={0} src={this.grid.getThemeToolbarIconFolder() + "/collapseAll.png"} className={"imageButtonCollapseAll"}
-                                alt={Constants.PGR_BTN_COLLAPSE_ALL_TOOLTIP} title={Constants.PGR_BTN_COLLAPSE_ALL_TOOLTIP} />
-                        </IconButton>
+                            <IconButton className={"imageButtonSize"}>
+                                <img tabIndex={0} src={this.grid.getThemeToolbarIconFolder() + "/collapseAll.png"} className={"imageButtonCollapseAll"}
+                                    alt={Constants.PGR_BTN_COLLAPSE_ALL_TOOLTIP} title={Constants.PGR_BTN_COLLAPSE_ALL_TOOLTIP} />
+                            </IconButton>
                         </span>
 
                         <span key={gridId + "btnExpandAll"} id={gridId + "btnExpandAll"} className={"pagerDiv  iconCell"}>
-                        <IconButton className={"imageButtonSize"}>
-                            <img tabIndex={0} src={this.grid.getThemeToolbarIconFolder() + "/expandAll.png"} className={"imageButtonExpandAll"}
-                                alt={Constants.PGR_BTN_EXP_ALL_TOOLTIP} title={Constants.PGR_BTN_EXP_ALL_TOOLTIP} />
-                        </IconButton>
+                            <IconButton className={"imageButtonSize"}>
+                                <img tabIndex={0} src={this.grid.getThemeToolbarIconFolder() + "/expandAll.png"} className={"imageButtonExpandAll"}
+                                    alt={Constants.PGR_BTN_EXP_ALL_TOOLTIP} title={Constants.PGR_BTN_EXP_ALL_TOOLTIP} />
+                            </IconButton>
                         </span>
                         <span key={gridId + "linesep" + linesep++} className={"pagerDiv lineSep"}>&nbsp;</span>
                     </span>
@@ -397,10 +400,10 @@ export default class MaterialToolbar extends UIComponent {
                 topLevelToolbarButtons.push(
                     <span key="2">
                         <span key={gridId + "btnSort"} id={gridId + "btnSort"} className={"pagerDiv  iconCell"}>
-                        <IconButton className={"imageButtonSize"}>
-                            <img tabIndex={0} src={this.grid.getThemeToolbarIconFolder() + "/sort.png"} className={"imageButtonSort"}
-                                alt={Constants.PGR_BTN_SORT_TOOLTIP} title={Constants.PGR_BTN_SORT_TOOLTIP} />
-                        </IconButton>
+                            <IconButton className={"imageButtonSize"}>
+                                <img tabIndex={0} src={this.grid.getThemeToolbarIconFolder() + "/sort.png"} className={"imageButtonSort"}
+                                    alt={Constants.PGR_BTN_SORT_TOOLTIP} title={Constants.PGR_BTN_SORT_TOOLTIP} />
+                            </IconButton>
                         </span>
                         <span key={gridId + "linesep" + linesep++} className={"pagerDiv lineSep"}>&nbsp;</span>
                     </span>
@@ -412,10 +415,12 @@ export default class MaterialToolbar extends UIComponent {
                 topLevelToolbarButtons.push(
                     <span key="3">
                         <span key={gridId + "btnSettings"} id={gridId + "btnSettings"} className={"pagerDiv  iconCell"}>
-                        <IconButton className={"imageButtonSize"}>
-                            <img tabIndex={0} src={this.grid.getThemeToolbarIconFolder() + "/settings.png"} className={"imageButtonSettings"}
-                                alt={Constants.PGR_BTN_SETTINGS_TOOLTIP} title={Constants.PGR_BTN_SETTINGS_TOOLTIP} />
-                        </IconButton>
+                            <IconButton style={{ width: "40px", height: "40px" }}>
+                                <Settings className={"imageButtonSettings"}>{Constants.PGR_BTN_SETTINGS_TOOLTIP}</Settings>
+                                {/* <img tabIndex={0} src={this.grid.getThemeToolbarIconFolder() + "/settings.png"} 
+                            className={"imageButtonSettings"}
+                                alt={Constants.PGR_BTN_SETTINGS_TOOLTIP} title={Constants.PGR_BTN_SETTINGS_TOOLTIP} /> */}
+                            </IconButton>
                         </span>
                     </span>
                 );
@@ -423,10 +428,9 @@ export default class MaterialToolbar extends UIComponent {
                     topLevelToolbarButtons.push(
                         <span key="4">
                             <span key={gridId + "btnSettings"} id={gridId + "btnSettings"} className={"pagerDiv  iconCell"}>
-                            <IconButton className={"imageButtonSize"}>
-                                <img tabIndex={0} src={this.grid.getThemeToolbarIconFolder() + "/openSettings.png"} className={"imageButtonOpenSettings"}
-                                    alt={Constants.PGR_BTN_OPEN_SETTINGS_TOOLTIP} title={Constants.PGR_BTN_OPEN_SETTINGS_TOOLTIP} />
-                            </IconButton>
+                                <IconButton style={{ width: "40px", height: "40px" }}>
+                                    <Settings className={"imageButtonOpenSettings"}>{Constants.PGR_BTN_OPEN_SETTINGS_TOOLTIP}</Settings>
+                                </IconButton>
                             </span>
                         </span>
                     );
@@ -435,10 +439,11 @@ export default class MaterialToolbar extends UIComponent {
                 topLevelToolbarButtons.push(
                     <span key="5">
                         <span key={gridId + "btnSaveSettings"} id={gridId + "btnSaveSettings"} className={"pagerDiv  iconCell"}>
-                        <IconButton className={"imageButtonSize"}>
-                            <img tabIndex={0} src={this.grid.getThemeToolbarIconFolder() + "/saveSettings.png"} className={"imageButtonSaveSettings"}
-                                alt={Constants.PGR_BTN_SAVE_SETTINGS_TOOLTIP} title={Constants.PGR_BTN_SAVE_SETTINGS_TOOLTIP} />
-                        </IconButton>
+                            <IconButton style={{ width: "40px", height: "40px" }}>
+                                <SettingsApplications className={"imageButtonSaveSettings"}>
+                                    {Constants.PGR_BTN_SAVE_SETTINGS_TOOLTIP}
+                                </SettingsApplications>
+                            </IconButton>
                         </span>
                         <span key={gridId + "linesep" + linesep++} className={"pagerDiv lineSep"}>&nbsp;</span>
                     </span>
@@ -449,30 +454,34 @@ export default class MaterialToolbar extends UIComponent {
                 topLevelToolbarButtons.push(
                     <span key="6">
                         <span key={gridId + "btnFilterShowHide"} id={gridId + "btnFilterShowHide"} className={"pagerDiv  iconCell"}>
-                            <IconButton className={"imageButtonSize"}>
-                                <img tabIndex={0} src={this.grid.getThemeToolbarIconFolder() + "/filterShowHide.png"} className={"imageButtonFilterShowHide"}
-                                    alt={Constants.PGR_BTN_FILTER_TOOLTIP} title={Constants.PGR_BTN_FILTER_TOOLTIP} />
+                            <IconButton style={{ width: "40px", height: "40px" }}>
+                                <FilterList className={"imageButtonFilterShowHide"}>
+                                    {Constants.PGR_BTN_FILTER_TOOLTIP}
+                                </FilterList>
                             </IconButton>
                         </span>
                     </span>
                 );
                 topLevelToolbarButtons.push(
                     <span key="7">
-                        <span key={gridId + "btnFilter"} id={gridId + "btnFilter"} className={"pagerDiv  iconCell"}>
-                        <IconButton className={"imageButtonSize"}>
-                            <img tabIndex={0} src={this.grid.getThemeToolbarIconFolder() + "/filter.png"} className={"imageButtonFilter"}
-                                alt={Constants.PGR_BTN_RUN_FILTER_TOOLTIP} title={Constants.PGR_BTN_RUN_FILTER_TOOLTIP} />
-                        </IconButton>
+                        <span key={gridId + "btnFilter"} id={gridId + "btnFilter"} className={"pagerDiv  iconCell"}>                            
+                            <IconButton style={{ width: "40px", height: "40px" }}>
+                                <Sync className={"imageButtonFilter"}>
+                                    {Constants.PGR_BTN_RUN_FILTER_TOOLTIP}
+                                </Sync>
+                            </IconButton>
                         </span>
                     </span>
                 );
                 topLevelToolbarButtons.push(
                     <span key="8">
                         <span key={gridId + "btnClearFilter"} id={gridId + "btnClearFilter"} className={"pagerDiv  iconCell"}>
-                        <IconButton className={"imageButtonSize"}>
-                            <img tabIndex={0} src={this.grid.getThemeToolbarIconFolder() + "/clearFilter.png"} className={"imageButtonClearFilter"}
-                                alt={Constants.PGR_BTN_CLEAR_FILTER_TOOLTIP} title={Constants.PGR_BTN_CLEAR_FILTER_TOOLTIP} />
-                        </IconButton>
+                           
+                            <IconButton style={{ width: "40px", height: "40px" }}>
+                                <ClearAll className={"imageButtonClearFilter"}>
+                                    {Constants.PGR_BTN_CLEAR_FILTER_TOOLTIP}
+                                </ClearAll>
+                            </IconButton>
                         </span>
                         <span key={gridId + "linesep" + linesep++} className={"pagerDiv lineSep"}>&nbsp;</span>
                     </span>
@@ -483,10 +492,10 @@ export default class MaterialToolbar extends UIComponent {
 
                     <span key="9">
                         <span key={gridId + "btnPrint"} id={gridId + "btnPrint"} className={"pagerDiv  iconCell"}>
-                        <IconButton className={"imageButtonSize"}>
-                            <img tabIndex={0} src={this.grid.getThemeToolbarIconFolder() + "/print.png"} className={"imageButtonPrint"}
-                                alt={Constants.PGR_BTN_PRINT_TOOLTIP} title={Constants.PGR_BTN_PRINT_TOOLTIP} />
-                        </IconButton>
+                            <IconButton className={"imageButtonSize"}>
+                                <img tabIndex={0} src={this.grid.getThemeToolbarIconFolder() + "/print.png"} className={"imageButtonPrint"}
+                                    alt={Constants.PGR_BTN_PRINT_TOOLTIP} title={Constants.PGR_BTN_PRINT_TOOLTIP} />
+                            </IconButton>
                         </span>
                     </span>);
 
@@ -495,10 +504,10 @@ export default class MaterialToolbar extends UIComponent {
                 topLevelToolbarButtons.push(
                     <span key="10">
                         <span key={gridId + "btnPdf"} id={gridId + "btnPdf"} className={"pagerDiv  iconCell"}>
-                        <IconButton className={"imageButtonSize"}>
-                            <img tabIndex={0} src={this.grid.getThemeToolbarIconFolder() + "/pdf.png"} className={"imageButtonPdf"}
-                                alt={Constants.PGR_BTN_PDF_TOOLTIP} title={Constants.PGR_BTN_PDF_TOOLTIP} />
-                        </IconButton>
+                            <IconButton className={"imageButtonSize"}>
+                                <img tabIndex={0} src={this.grid.getThemeToolbarIconFolder() + "/pdf.png"} className={"imageButtonPdf"}
+                                    alt={Constants.PGR_BTN_PDF_TOOLTIP} title={Constants.PGR_BTN_PDF_TOOLTIP} />
+                            </IconButton>
                         </span>
                     </span>);
 
@@ -508,25 +517,26 @@ export default class MaterialToolbar extends UIComponent {
                 );
             }
 
-            if (this.grid.enableExport) {
-                topLevelToolbarButtons.push(
-                    <span key="11">
-                        <span key={gridId + "btnWord"} id={gridId + "btnWord"} className={"pagerDiv  iconCell"}>
-                        <IconButton className={"imageButtonSize"}>
-                            <img tabIndex={0} src={this.grid.getThemeToolbarIconFolder() + "/word.png"} className={"imageButtonWord"}
-                                alt={Constants.PGR_BTN_WORD_TOOLTIP} title={Constants.PGR_BTN_WORD_TOOLTIP} />
-                        </IconButton>
-                        </span>
-                    </span>);
-            }
+            // if (this.grid.enableExport) {
+            //     topLevelToolbarButtons.push(
+            //         <span key="11">
+            //             <span key={gridId + "btnWord"} id={gridId + "btnWord"} className={"pagerDiv  iconCell"}>
+            //                 <IconButton className={"imageButtonSize"}>
+            //                     <img tabIndex={0} src={this.grid.getThemeToolbarIconFolder() + "/word.png"} className={"imageButtonWord"}
+            //                         alt={Constants.PGR_BTN_WORD_TOOLTIP} title={Constants.PGR_BTN_WORD_TOOLTIP} />
+            //                 </IconButton>
+            //             </span>
+            //         </span>);
+            // }
             if (this.grid.enableExport) {
                 topLevelToolbarButtons.push(
                     <span key="12">
                         <span key={gridId + "btnExcel"} id={gridId + "btnExcel"} className={"pagerDiv  iconCell"}>
-                        <IconButton className={"imageButtonSize"}>
-                            <img tabIndex={0} src={this.grid.getThemeToolbarIconFolder() + "/export.png"} className={"imageButtonExcel"}
-                                alt={Constants.PGR_BTN_EXCEL_TOOLTIP} title={Constants.PGR_BTN_EXCEL_TOOLTIP} />
-                        </IconButton>
+                            <IconButton style={{ width: "40px", height: "40px" }}>
+                                <GetApp className={"imageButtonExcel"}>
+                                    {Constants.PGR_BTN_EXCEL_TOOLTIP}
+                                </GetApp>
+                            </IconButton>
                         </span>
                     </span>);
             }
@@ -688,8 +698,6 @@ export default class MaterialToolbar extends UIComponent {
             const img = UIUtils.findElementWithClassName(this.domElement, `imageButton${UIUtils.doCap(obj)}`);
             if (img) {
                 img.code = obj;
-                UIUtils.removeDomEventListener(img, "mouseover", imageButtonMouseOver)
-                UIUtils.removeDomEventListener(img, "mouseout", imageButtonMouseOut)
                 UIUtils.removeDomEventListener(img, "click", imageButtonClick);
                 img.pagerControl = null;
                 img.src = "";
@@ -702,8 +710,6 @@ export default class MaterialToolbar extends UIComponent {
             const img = UIUtils.findElementWithClassName(this.domElement, `imageButton${UIUtils.doCap(obj)}`);
             if (img) {
                 img.code = obj;
-                UIUtils.addDomEventListener(this, img, "mouseover", imageButtonMouseOver)
-                UIUtils.addDomEventListener(this, img, "mouseout", imageButtonMouseOut)
                 UIUtils.addDomEventListener(this, img, "click", imageButtonClick)
                 img.pagerControl = this;
             }
@@ -790,16 +796,6 @@ MaterialToolbar.ACTION_EXPAND_ALL = "expandAll";
 MaterialToolbar.ACTION_COLLAPSE_ALL = "collapseAll";
 
 
-var imageButtonMouseOver = event => {
-    const target = event.currentTarget || event.srcElement;
-    if (target.parentNode.className.includes("disabled")) return;
-    if (!target.className.includes("over")) target.className = "over";
-}
-var imageButtonMouseOut = event => {
-    const target = event.currentTarget || event.srcElement;
-    if (target.parentNode.className.includes("disabled")) return;
-    if (target.className.includes("over")) target.className = target.className.replace("over", "");
-}
 var imageButtonClick = event => {
     const target = event.currentTarget || event.srcElement;
     if (target.parentNode.className.includes("disabled")) return;

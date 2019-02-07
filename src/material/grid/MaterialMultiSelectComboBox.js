@@ -1,10 +1,14 @@
 import { MultiSelectComboBox, TriStateCheckBox, UIUtils, UIComponent } from '../../flexicious';
 import MaterialTristateCheckBox from './MaterialTristateCheckBox';
+import MenuIcon from '@material-ui/icons/Menu';
+import IconButton from '@material-ui/core/IconButton';
+
+import React from 'react'
 class MaterialMultiSelectComboBoxCheckBox extends MaterialTristateCheckBox {
 
     constructor() {
         super();
-        this.setStyleAttribute("display","block")
+        this.setStyleAttribute("display", "block")
     }
     determineCheckBox() {
         super.determineCheckBox();
@@ -13,7 +17,31 @@ class MaterialMultiSelectComboBoxCheckBox extends MaterialTristateCheckBox {
     }
 }
 export default class MaterialMultiSelectComboBox extends MultiSelectComboBox {
+    addTemplate() {
+        const iconButtonStyles= { visibility: 'hidden', width: "40px", height: "40px", position:"absolute", right:"0px", top:"0px"};
+        const template = <span>
+            <input className={'textBox'} type={'text'} />
 
+            <IconButton className={'insideIcon inputIcon'} style={iconButtonStyles}>
+                <MenuIcon />
+            </IconButton>
+            <IconButton className={'outsideIcon inputIcon'} style={iconButtonStyles} >
+                <MenuIcon />
+            </IconButton>
+        </span>;
+
+        this.children.push(template.props.children);
+    }
+    
+    sizeComponents() {
+        super.sizeComponents();
+        
+        const insideIconImg = this.getInsideIcon();
+        insideIconImg.style.top = `2px`;
+        insideIconImg.style.left = ``;
+        insideIconImg.style.width = `40px`;
+        insideIconImg.style.height = `40px`;
+    }
     createTriStateCheckBox(lbl, index) {
         const cb = new MaterialMultiSelectComboBoxCheckBox();
         cb.key = index;
@@ -28,18 +56,18 @@ export default class MaterialMultiSelectComboBox extends MultiSelectComboBox {
         this.checkboxes.push(cb);
         return cb;
     }
-    showPopup(parent){
-        this.checkboxes=[];
+    showPopup(parent) {
+        this.checkboxes = [];
         return super.showPopup(parent);
     }
-    
-    createCheckBoxRow(){
-        var row =new UIComponent("div");
+
+    createCheckBoxRow() {
+        var row = new UIComponent("div");
         row.attachClass("materialCheckBoxRow");
         return row;
     }
-    destroyPopup(force){
-        this.checkboxes =[];
+    destroyPopup(force) {
+        this.checkboxes = [];
         return super.destroyPopup(force);
     }
 
@@ -105,8 +133,8 @@ export default class MaterialMultiSelectComboBox extends MultiSelectComboBox {
                     cb.setSelectedState(TriStateCheckBox.STATE_CHECKED);
                 }
                 else if (i === 0 && this.getAddAllItem()) {
-                    cb.setSelectedState(this.selectedValues.length >= this.getDataProvider().length - 1 ? 
-                    TriStateCheckBox.STATE_CHECKED : this.selectedValues.length > 0 ? TriStateCheckBox.STATE_MIDDLE : TriStateCheckBox.STATE_UNCHECKED);
+                    cb.setSelectedState(this.selectedValues.length >= this.getDataProvider().length - 1 ?
+                        TriStateCheckBox.STATE_CHECKED : this.selectedValues.length > 0 ? TriStateCheckBox.STATE_MIDDLE : TriStateCheckBox.STATE_UNCHECKED);
                 }
                 else {
                     let cbVal = item ? UIUtils.resolveExpression(item, this.dataField) : "";
