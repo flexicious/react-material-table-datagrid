@@ -6,6 +6,8 @@ import MaterialToolbar from "../adapter/toolbar/MaterialToolbar"
 import MaterialMultiSelectComboBox from "./MaterialMultiSelectComboBox"
 import MaterialComboBox from "./MaterialComboBox"
 import MaterialDateComboBox from "./MaterialDateComboBox"
+import MaterialTextInput from "./MaterialTextInput"
+import MaterialNumericRangeBox from "./MaterialNumericRangeBox"
 
 
 
@@ -32,7 +34,13 @@ export default class MaterialDataGrid extends ReactDataGrid {
             } else if (val === "DateComboBox") {
                 attr = "filterRenderer";
                 node = new ClassFactory(MaterialDateComboBox);
-            }
+            } else if (val === "TextInput") {
+                attr = "filterRenderer";
+                node = new ClassFactory(MaterialTextInput);
+            } else if (val === "NumericRangeBox") {
+                attr = "filterRenderer";
+                node = new ClassFactory(MaterialNumericRangeBox);
+            }            
         }
 
         super.applyAttribute(target, attr, node, direct);

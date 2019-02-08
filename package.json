@@ -5,7 +5,7 @@
   "keywords": [],
   "main": "src/index.js",
   "dependencies": {
-    "flexicious-react-datagrid": "1.9.1"
+    "flexicious-react-datagrid": "1.9.2"
   },
   "peerDependencies": {
   },

@@ -1,4 +1,4 @@
-import { DateComboBox, UIUtils, Constants, FlexDataGridEvent } from '../../flexicious';
+import { DateComboBox, UIUtils, Constants, FlexDataGridEvent, DateRange, ToolbarAction,DateRangePicker } from '../../flexicious';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 
@@ -87,6 +87,17 @@ export default class MaterialDateComboBox extends DateComboBox {
                     }
                 }
             }
+        }
+
+        if (this._selectedValue === DateRange.DATE_RANGE_CUSTOM) {
+            const actions = [ToolbarAction.create(Constants.MCS_BTN_APPLY_LABEL, this.onDatePicker, true),
+            ToolbarAction.create(Constants.MCS_BTN_CANCEL_LABEL, this.onDatePickerCancel.bind(this), true),
+            ];
+
+
+            this.popup = <DateRangePicker combo={this} grid={this.grid} dateFormatString={this.dateFormatString} />
+            this.popup = UIUtils.addPopUp(this.popup, this.domElement, true, null, "Select Date", actions);
+            this.grid.addPopup(this.popup);
         }
         this._dataProviderDirty = true;
         this.commitDataProvider();

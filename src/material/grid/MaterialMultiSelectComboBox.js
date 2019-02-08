@@ -1,7 +1,8 @@
-import { MultiSelectComboBox, TriStateCheckBox, UIUtils, UIComponent } from '../../flexicious';
+import { MultiSelectComboBox, TriStateCheckBox, UIUtils, UIComponent, ComboBox, TextInput, Constants, FlexDataGridEvent } from '../../flexicious';
 import MaterialTristateCheckBox from './MaterialTristateCheckBox';
 import MenuIcon from '@material-ui/icons/Menu';
 import IconButton from '@material-ui/core/IconButton';
+import TextField from '@material-ui/core/TextField';
 
 import React from 'react'
 class MaterialMultiSelectComboBoxCheckBox extends MaterialTristateCheckBox {
@@ -18,25 +19,55 @@ class MaterialMultiSelectComboBoxCheckBox extends MaterialTristateCheckBox {
 }
 export default class MaterialMultiSelectComboBox extends MultiSelectComboBox {
     addTemplate() {
-        const iconButtonStyles= { visibility: 'hidden', width: "40px", height: "40px", position:"absolute", right:"0px", top:"0px"};
         const template = <span>
-            <input className={'textBox'} type={'text'} />
-
-            <IconButton className={'insideIcon inputIcon'} style={iconButtonStyles}>
+            <TextField disabled value={Constants.DEFAULT_ALL_ITEM_TEXT} />
+            <IconButton className={'insideIcon inputIcon'} style={{ width: "40px", height: "40px", position: "absolute", right: "0px", top: "0px" }}>
                 <MenuIcon />
             </IconButton>
-            <IconButton className={'outsideIcon inputIcon'} style={iconButtonStyles} >
+            <IconButton className={'outsideIcon inputIcon'} style={{ display: "none", width: "4px", height: "4px", position: "absolute", right: "0px", top: "0px" }} >
                 <MenuIcon />
             </IconButton>
         </span>;
-
         this.children.push(template.props.children);
+        this.onClick = this.onClick.bind(this);
+        this.addEventListener(this, Constants.EVENT_CLICK,
+            this.onClick
+        );
+        this._textBox = {};
     }
-    
+    getTextBox() {
+        return this._textBox;
+    }
+    setLabel() {
+        super.setLabel();
+        const template = <span>
+            <TextField disabled value={this._label} />
+            <IconButton className={'insideIcon inputIcon'} style={{ width: "40px", height: "40px", position: "absolute", right: "0px", top: "0px" }}>
+                <MenuIcon />
+            </IconButton>
+            <IconButton className={'outsideIcon inputIcon'} style={{ display: "none", width: "4px", height: "4px", position: "absolute", right: "0px", top: "0px" }} >
+                <MenuIcon />
+            </IconButton>
+        </span>;
+        this.children = [template.props.children];
+        this.requestRender();
+    }
+
+    onClick() {
+        //click anywhere to launch popup
+        this.dispatchEvent(new FlexDataGridEvent(TextInput.INSIDE_ICON_CLICK))
+    }
+    setIconVisible() {
+
+    }
+    componentDidMountCustom() {
+        ComboBox.addAllItemToDataProvider(this);
+
+    }
     sizeComponents() {
-        super.sizeComponents();
-        
+
         const insideIconImg = this.getInsideIcon();
+        insideIconImg.style.visibility = `visible`;
         insideIconImg.style.top = `2px`;
         insideIconImg.style.left = ``;
         insideIconImg.style.width = `40px`;

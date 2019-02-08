@@ -4157,10 +4157,10 @@ flatten@^1.0.2:
   resolved "https://registry.yarnpkg.com/flatten/-/flatten-1.0.2.tgz#dae46a9d78fbe25292258cc1e780a41d95c03782"
   integrity sha1-2uRqnXj74lKSJYzB54CkHZXAN4I=
 
-flexicious-react-datagrid@1.9.1:
-  version "1.9.1"
-  resolved "https://registry.yarnpkg.com/flexicious-react-datagrid/-/flexicious-react-datagrid-1.9.1.tgz#3d84ce8cbe0200987ba3b4aced155cf2a5de658c"
-  integrity sha512-PPVCC4gnjpGPwJ4RzDKdT5ZoLGohLveQW/XDuMqh7hpmfqVNkzmAUjB62mAjTNw47Lb5YaA6X9RGb74mjElwXg==
+flexicious-react-datagrid@1.9.2:
+  version "1.9.2"
+  resolved "https://registry.yarnpkg.com/flexicious-react-datagrid/-/flexicious-react-datagrid-1.9.2.tgz#4a9c79d748662494ddec4749e0e1a9960133d517"
+  integrity sha512-x7iYDXVO2hbMC0lN55dgW0H3BJu5xV6eqTvy2kgJUPThe81g0VfaEJaJ4VI8Olkrjzp4nRRmRJyjlKRkv+7N6w==
 
 flush-write-stream@^1.0.0:
   version "1.0.3"
