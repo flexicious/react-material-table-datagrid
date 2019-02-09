@@ -20,7 +20,10 @@ class MaterialMultiSelectComboBoxCheckBox extends MaterialTristateCheckBox {
 export default class MaterialMultiSelectComboBox extends MultiSelectComboBox {
     addTemplate() {
         const template = <span>
-            <TextField disabled value={Constants.DEFAULT_ALL_ITEM_TEXT} />
+            <TextField InputProps={{
+                readOnly: true,
+            }}
+                value={Constants.DEFAULT_ALL_ITEM_TEXT} />
             <IconButton className={'insideIcon inputIcon'} style={{ width: "40px", height: "40px", position: "absolute", right: "0px", top: "0px" }}>
                 <MenuIcon />
             </IconButton>
@@ -41,7 +44,9 @@ export default class MaterialMultiSelectComboBox extends MultiSelectComboBox {
     setLabel() {
         super.setLabel();
         const template = <span>
-            <TextField disabled value={this._label} />
+            <TextField InputProps={{
+                readOnly: true,
+            }} value={this._label} />
             <IconButton className={'insideIcon inputIcon'} style={{ width: "40px", height: "40px", position: "absolute", right: "0px", top: "0px" }}>
                 <MenuIcon />
             </IconButton>
