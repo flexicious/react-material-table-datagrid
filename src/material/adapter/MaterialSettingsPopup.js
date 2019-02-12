@@ -106,9 +106,9 @@ export default class MaterialSettingsPopup extends UIComponent {
         return item.getUniqueIdentifier();
     }
     render() {
-        return <div className={"settingsPopup flexiciousPopup"}>
-        <div className={"labelSize"}>Settings:</div>
-            <div className={"gridExport"}>{Constants.SETTINGS_COLUMNS_TO_SHOW}
+        return <div style={{width: 540}}>
+        <div style={{margin: '15px',fontSize: 20}} >Settings:</div>
+            <div style={{ margin: 15,width: 500 }}>{Constants.SETTINGS_COLUMNS_TO_SHOW}
                 <ReactDataGrid width={"100%"} height={300} dataProvider={this._cols} enableActiveCellHighlight={false}
                     selectedObjects={(this._cols.length !== this._visibleCols.length) ? this._visibleCols : this._cols}
                     onChange={(evt) => { this.selectedColumns = evt.grid.getSelectedObjects() }}>
@@ -119,7 +119,7 @@ export default class MaterialSettingsPopup extends UIComponent {
                 </ReactDataGrid>
             </div>
             <div className={"options"}>\
-            <FormControl className={"labelSize"}>
+            <FormControl style={{margin: '15px'}}>
                     <FormGroup>
                         <FormControlLabel
                             control={<Checkbox className={"cbFooter"} defaultChecked={this._footerVisible} style={this._enableFooters ? {} : { "visibility": "hidden" }}
@@ -131,7 +131,7 @@ export default class MaterialSettingsPopup extends UIComponent {
                             label={Constants.SETTINGS_SHOW_FILTER} />
                     </FormGroup>
                 </FormControl>
-                <div className={"labelSize"}>
+                <div style={{margin: '15px'}}>
                     <span>{Constants.SETTINGS_RECORDS_PER_PAGE + "  "}</span>
                     <TextField name="perPage" style={{ width: 'auto' }} className={"txtPageSize"} defaultValue={this._pageSize || 50}
                         onChange={(evt) => { this._pageSize = parseInt(evt.currentTarget.value) }} />

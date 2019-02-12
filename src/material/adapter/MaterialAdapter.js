@@ -57,6 +57,7 @@ class MaterialModal extends React.Component {
                     title={this.props.title}
                     actions={actions}
                     open={this.state.open}
+                    maxWidth='md'
                 >
                     {children}
 

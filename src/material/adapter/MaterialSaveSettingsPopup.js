@@ -99,7 +99,7 @@ export default class MaterialSaveSettingsPopup extends UIComponent {
      * Initializes the auto complete and watermark plugins
      */
     render() {
-        let prefName = null;
+        let prefName = 'The preferences you specify below will be retained when this grid is loaded in the future:';
         if (this.grid.enableMultiplePreferences) {
             return <div>
                 <div style={{ float: 'left' }}><span> {Constants.SAVE_SETTINGS_PREFERENCE_NAME}
@@ -112,8 +112,8 @@ export default class MaterialSaveSettingsPopup extends UIComponent {
 
         }
         return <div>
-            {prefName}
-            <table style={{ width: "800px" }}>
+            <div style={{fontSize: 20, margin: 10}}>{prefName}</div>
+            <table style={{ width: "800px", margin: 10}}>
                 <tbody>
                     <tr>
                         <td>

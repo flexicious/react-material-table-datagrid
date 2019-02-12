@@ -106,9 +106,9 @@ export default class MaterialExportOptionsView extends UIComponent {
      * Initializes the auto complete and watermark plugins
      */
     render() {
-        return <div key="exportdiv" className={"formExport"}>
-                <div className={"HeaderText"}>Settings</div>
-            <div key="columnsDiv" className={"columnsLabel listExport"} >{Constants.EXP_LBL_COLS_TO_EXPORT_TEXT}
+        return <div key="exportdiv">
+                <div style={{margin: 10,fontSize: 20}}>Settings</div>
+            <div key="columnsDiv" style={{float: 'left',margin: 10}}>{Constants.EXP_LBL_COLS_TO_EXPORT_TEXT}
 
                 <ReactDataGrid key="columnsGrid" width={300} height={300} selectedKeyField={"name"} dataProvider={this.exportOptions.availableColumns} enableActiveCellHighlight={false}
                     selectedKeys={this.itemsToShow.length ? UIUtils.extractPropertyValues(this.itemsToShow, "uniqueIdentifier")
@@ -123,7 +123,7 @@ export default class MaterialExportOptionsView extends UIComponent {
                     <ReactDataGridColumn dataField={"headerText"} headerText={Constants.EXP_LBL_COLS_TO_EXPORT_TEXT} />
                 </ReactDataGrid>
             </div>
-            <div key="optionsDiv" className={"options flexiciousGrid radioExport"}>
+            <div key="optionsDiv" style={{float: 'right',width: 370,padding: 20}}>
                 <FormControl >
                     <RadioGroup name="pageSelection" onChange={(evt, newValue) => { this.pageSelection = newValue; }} defaultSelected={PrintExportOptions.PRINT_EXPORT_CURRENT_PAGE}>
                         <FormControlLabel
@@ -145,9 +145,9 @@ export default class MaterialExportOptionsView extends UIComponent {
                     </RadioGroup>
                 </FormControl>
                 
-                <TextField  key="fromPage" name="fromPage" className={"flxsExportpaging txtPage"} onChange={(evt, newValue) => { this.pageTo = newValue; }} />
+                <TextField  key="fromPage" name="fromPage" style={{width: 150, margin: 5}} onChange={(evt, newValue) => { this.pageTo = newValue; }} />
                 <label> {Constants.PGR_TO} </label>
-                <TextField  key="toPage" name="toPage" className={"flxsExportpaging txtPage"} onChange={(evt, newValue) => { this.pageFrom = newValue; }} />
+                <TextField  key="toPage" name="toPage" style={{width: 150, margin: 5}}onChange={(evt, newValue) => { this.pageFrom = newValue; }} />
                 <label>{this.pageCount}</label>
                 <div style={{margin: '5px'}}>
 
