@@ -12,6 +12,6 @@ export default class MaterialNumericRangeBox extends NumericRangeBox {
     }
     
     createSeparator(){
-        return <span style={{"padding":"10px"}}>{"--"}</span>;
+        return <span key="sep" style={{"padding":"10px"}}>{"--"}</span>;
     }
 }

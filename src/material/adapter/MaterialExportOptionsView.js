@@ -2,16 +2,14 @@
  * Flexicious
  * Copyright 2011, Flexicious LLC
  */
-import {
-    UIUtils, Constants, UIComponent, ComboBox, ReactDataGrid, ReactDataGridColumn, ToolbarAction
-    , MultiSelectComboBox, ExportOptions, PrintExportOptions, BaseEvent
-} from '../../flexicious'
-import React from 'react'
-import Radio from '@material-ui/core/Radio';
-import RadioGroup from '@material-ui/core/RadioGroup';
-import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormControl from '@material-ui/core/FormControl';
+import { FormControl, FormControlLabel, MenuItem, Radio, RadioGroup, Select, TextField, Typography } from '@material-ui/core';
+import React from 'react';
+import { BaseEvent, Constants, ExportOptions, PrintExportOptions, ToolbarAction, UIComponent, UIUtils } from '../../flexicious';
+import MaterialCheckBoxColumn from "../grid/MaterialCheckBoxColumn";
+import MaterialDataGrid from "../grid/MaterialDataGrid";
+import MaterialDataGridColumn from "../grid/MaterialDataGridColumn";
+
+
 /**
  * A ExportOptionsView that which can be used within the filtering/binding infrastructure.
  * @constructor
@@ -22,16 +20,8 @@ export default class MaterialExportOptionsView extends UIComponent {
     constructor() {
         super({}, "div")
         this.attachClass("flexiciousGrid");
-        this.cbxColumns = new MultiSelectComboBox();
-        this.cbxColumns.alwaysVisible = true;
-
-        this.cbxExporters = new ComboBox();
-        this.cbxExporters.ignoreAllItem = true;
-        this.cbxExporters.setAddAllItem(false);
         this.setWidth(800);
-
         this.exportOptions = new ExportOptions();
-
     }
 
     /**
@@ -107,10 +97,12 @@ export default class MaterialExportOptionsView extends UIComponent {
      */
     render() {
         return <div key="exportdiv">
-                <div style={{margin: 10,fontSize: 20}}>Settings</div>
-            <div key="columnsDiv" style={{float: 'left',margin: 10}}>{Constants.EXP_LBL_COLS_TO_EXPORT_TEXT}
+            <Typography style={{ margin: 10, fontSize: 20 }}>Settings</Typography>
+            <div key="columnsDiv" style={{ float: 'left', margin: 10 }}>
+            <Typography>{Constants.EXP_LBL_COLS_TO_EXPORT_TEXT}</Typography>
 
-                <ReactDataGrid key="columnsGrid" width={300} height={300} selectedKeyField={"name"} dataProvider={this.exportOptions.availableColumns} enableActiveCellHighlight={false}
+
+                <MaterialDataGrid key="columnsGrid" width={300} height={300} selectedKeyField={"name"} dataProvider={this.exportOptions.availableColumns} enableActiveCellHighlight={false}
                     selectedKeys={this.itemsToShow.length ? UIUtils.extractPropertyValues(this.itemsToShow, "uniqueIdentifier")
                         : UIUtils.extractPropertyValues(this.availableColumns, "name")}
                     onChange={(evt) => {
@@ -119,13 +111,14 @@ export default class MaterialExportOptionsView extends UIComponent {
                             this.exportOptions.columnsToExport = [];
                         }
                     }}>
-                    <ReactDataGridColumn type={"checkbox"} />
-                    <ReactDataGridColumn dataField={"headerText"} headerText={Constants.EXP_LBL_COLS_TO_EXPORT_TEXT} />
-                </ReactDataGrid>
+                    <MaterialCheckBoxColumn type={"checkbox"} />
+                    <MaterialDataGridColumn dataField={"headerText"} headerText={Constants.EXP_LBL_COLS_TO_EXPORT_TEXT} />
+                </MaterialDataGrid>
             </div>
-            <div key="optionsDiv" style={{float: 'right',width: 370,padding: 20}}>
+            <div key="optionsDiv" style={{ float: 'right', width: 370, padding: 20 }}>
                 <FormControl >
-                    <RadioGroup name="pageSelection" onChange={(evt, newValue) => { this.pageSelection = newValue; }} defaultSelected={PrintExportOptions.PRINT_EXPORT_CURRENT_PAGE}>
+                    <RadioGroup name="pageSelection" onChange={(evt, newValue) => { this.pageSelection = newValue; }} 
+                    defaultValue={PrintExportOptions.PRINT_EXPORT_CURRENT_PAGE}>
                         <FormControlLabel
                             value={PrintExportOptions.PRINT_EXPORT_CURRENT_PAGE}
                             control={<Radio name="currentPage" className={"flxsExportpaging RBN_CURRENT_PAGE"} />}
@@ -144,24 +137,33 @@ export default class MaterialExportOptionsView extends UIComponent {
                             label={Constants.EXP_RBN_SELECT_PGS_LABEL} />
                     </RadioGroup>
                 </FormControl>
-                
-                <TextField  key="fromPage" name="fromPage" style={{width: 150, margin: 5}} onChange={(evt, newValue) => { this.pageTo = newValue; }} />
-                <label> {Constants.PGR_TO} </label>
-                <TextField  key="toPage" name="toPage" style={{width: 150, margin: 5}}onChange={(evt, newValue) => { this.pageFrom = newValue; }} />
-                <label>{this.pageCount}</label>
-                <div style={{margin: '5px'}}>
 
-                    <label className={"LBL_EXPORT_FORMAT"}> {Constants.EXP_LBL_EXPORT_FORMAT_TEXT}</label>
-                    <select defaultValue={this.exportOptions.getExporterName()} onChange={(evt) => {
-                        this.exportOptions.exporter = this.exportOptions.exporters[evt.currentTarget.selectedIndex];
-                    }}>
+                <TextField key="fromPage" name="fromPage" style={{ width: 150, margin: 5 }} onChange={(evt, newValue) => { this.pageTo = newValue; }} />
+                <label> {Constants.PGR_TO} </label>
+                <TextField key="toPage" name="toPage" style={{ width: 150, margin: 5 }} onChange={(evt, newValue) => { this.pageFrom = newValue; }} />
+                <label>{this.pageCount}</label>
+                <div style={{ margin: '5px' }}>
+
+                    <Typography className={"LBL_EXPORT_FORMAT"}> {Constants.EXP_LBL_EXPORT_FORMAT_TEXT}</Typography>
+                    <Select value={this.exportOptions.getExporterName()} onChange={this.handleChange.bind(this)}>
                         {this.exportOptions.exporters.map((exporter, i) => {
-                            return <option key={"option" + i} value={exporter.getName()}>{exporter.getName()}</option>
+                            return <MenuItem key={"option" + i} value={exporter.getName()} name={i}>{exporter.getName()}</MenuItem>
                         })}
-                    </select>
+                    </Select>
                 </div>
             </div>
         </div>;
+    }
+    handleChange(evt) {
+        for(let i=0;i<this.exportOptions.exporters.length;i++){
+            if(this.exportOptions.exporters[i].getName() === evt.target.value){
+                this.exportOptions.exporter = this.exportOptions.exporters[i];
+                break;
+            }
+        }
+        
+        this.grid.removePopup(this.popup);
+        this.showDialog();
     }
 }
 

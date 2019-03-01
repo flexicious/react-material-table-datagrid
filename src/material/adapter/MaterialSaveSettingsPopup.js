@@ -8,7 +8,7 @@ import { Constants, ToolbarAction, UIUtils, UIComponent } from '../../flexicious
 import FormControl from '@material-ui/core/FormControl';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import { Checkbox } from '@material-ui/core';
+import { Checkbox, Typography } from '@material-ui/core';
 /**
  * A SaveSettingsPopup that which can be used within the filtering/binding infrastructure.
  * @constructor
@@ -112,7 +112,7 @@ export default class MaterialSaveSettingsPopup extends UIComponent {
 
         }
         return <div>
-            <div style={{fontSize: 20, margin: 10}}>{prefName}</div>
+            <Typography style={{fontSize: 20, margin: 10}}>{prefName}</Typography>
             <table style={{ width: "800px", margin: 10}}>
                 <tbody>
                     <tr>

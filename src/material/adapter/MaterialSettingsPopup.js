@@ -2,13 +2,17 @@
  * Flexicious
  * Copyright 2011, Flexicious LLC
  */
-import { UIUtils, Constants, UIComponent, ReactDataGrid, ReactDataGridColumn, ToolbarAction } from '../../flexicious'
+import { UIUtils, Constants, UIComponent, ToolbarAction } from '../../flexicious'
 
 import React from 'react'
-import { Checkbox, TextField } from '@material-ui/core';
+import { Checkbox, TextField, Typography } from '@material-ui/core';
+import MaterialDataGrid from "../grid/MaterialDataGrid";
+import MaterialDataGridColumn from "../grid/MaterialDataGridColumn";
+import MaterialCheckBoxColumn from "../grid/MaterialCheckBoxColumn";
 import FormControl from '@material-ui/core/FormControl';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+
 /**
  * A SettingsPopup that which can be used within the filtering/binding infrastructure.
  * @constructor
@@ -106,20 +110,20 @@ export default class MaterialSettingsPopup extends UIComponent {
         return item.getUniqueIdentifier();
     }
     render() {
-        return <div style={{width: 540}}>
-        <div style={{margin: '15px',fontSize: 20}} >Settings:</div>
-            <div style={{ margin: 15,width: 500 }}>{Constants.SETTINGS_COLUMNS_TO_SHOW}
-                <ReactDataGrid width={"100%"} height={300} dataProvider={this._cols} enableActiveCellHighlight={false}
+        return <div style={{ width: 540 }}>
+            <Typography style={{ margin: '15px', fontSize: 20 }} >Settings:</Typography>
+            <div style={{ marginLeft: 15, width: 500 }}>
+                <MaterialDataGrid enableActiveCellHighlight={false} width={"100%"} height={300} dataProvider={this._cols}
                     selectedObjects={(this._cols.length !== this._visibleCols.length) ? this._visibleCols : this._cols}
                     onChange={(evt) => { this.selectedColumns = evt.grid.getSelectedObjects() }}>
-                    <ReactDataGridColumn type={"checkbox"} />
-                    <ReactDataGridColumn dataField={"uniqueIdentifier"}
+                    <MaterialCheckBoxColumn />
+                    <MaterialDataGridColumn dataField={"uniqueIdentifier"}
                         labelFunction={this.getHeaderText}
                         headerText={Constants.SETTINGS_COLUMNS_TO_SHOW} />
-                </ReactDataGrid>
+                </MaterialDataGrid>
             </div>
-            <div className={"options"}>\
-            <FormControl style={{margin: '15px'}}>
+            <div className={"options"}>
+            <FormControl style={{ margin: '15px' }}>
                     <FormGroup>
                         <FormControlLabel
                             control={<Checkbox className={"cbFooter"} defaultChecked={this._footerVisible} style={this._enableFooters ? {} : { "visibility": "hidden" }}
@@ -131,8 +135,8 @@ export default class MaterialSettingsPopup extends UIComponent {
                             label={Constants.SETTINGS_SHOW_FILTER} />
                     </FormGroup>
                 </FormControl>
-                <div style={{margin: '15px'}}>
-                    <span>{Constants.SETTINGS_RECORDS_PER_PAGE + "  "}</span>
+                <div style={{ marginLeft: '15px', display: this._enablePaging ? "" : "none" }}>
+                    <Typography>{Constants.SETTINGS_RECORDS_PER_PAGE + "  "}</Typography>
                     <TextField name="perPage" style={{ width: 'auto' }} className={"txtPageSize"} defaultValue={this._pageSize || 50}
                         onChange={(evt) => { this._pageSize = parseInt(evt.currentTarget.value) }} />
                 </div>

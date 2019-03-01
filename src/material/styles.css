@@ -82,8 +82,9 @@
   width: 220px;
   display:inline-block;
  /* padding-top:0.5%;*/
- /* vertical-align: middle;*/
+  vertical-align: middle;
   height:100%;
+  line-height:50px;
 }
 .flexiciousGridPager .lineSep {
 
@@ -661,7 +662,7 @@
 }
 
 .flexiciousGrid .settingsPopup .txtPageSize{
- width: 55px;
+ width: 25px;
 }
 
 .flexiciousGrid .settingsPopup .columnsLabel{

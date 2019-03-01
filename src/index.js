@@ -17,6 +17,7 @@ function App() {
         enableExport
         enableFilters
         enableFooters
+        enablePaging
         dataProvider={[
           { label: "Company A", state: "NJ", rank: "1.11", date: new Date(2018, 10, 10) },
           { label: "Company B", state: "PA", rank: "11.1", date: new Date(2018, 11, 10) },
