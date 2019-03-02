@@ -499,6 +499,9 @@ export default class ToolbarImpl extends React.Component {
         this.props.pager.grid.addEventListener(this, FlexDataGrid.EVENT_CHANGE, this.refresh);
 
     }
+    componentWillUnmount(){
+        this.props.pager.grid.removeEventListener(FlexDataGrid.EVENT_CHANGE, this.refresh);
+    }
     enableDisableButton(button, enabled) {
         button.enabled = enabled;
         if (!button.enabled) {
