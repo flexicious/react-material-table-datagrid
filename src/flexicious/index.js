@@ -6,7 +6,8 @@ import {
     ExtendedFilterPageSortChangeEvent, FlexDataGrid, FlexDataGridEvent, DateRange, FlexDataGridDataCell, DateComboBox, Timer, DateRangePicker,
     NumericRangeBox
 
-} from 'flexicious-react-datagrid'
+} from "flexicious-react-datagrid"
+//from '../flexicious/js/library'
 
 export {
     UIUtils, ReactDataGrid, ReactDataGridPsuedoScroll, ReactDataGridColumnLevel, ReactDataGridColumn, ReactDataGridColumnGroup,

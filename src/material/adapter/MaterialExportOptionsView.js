@@ -163,7 +163,9 @@ export default class MaterialExportOptionsView extends UIComponent {
         }
         
         this.grid.removePopup(this.popup);
-        this.showDialog();
+        this.showDialog();//we have to do this because we are not a react component, we are a flexicious UIComponent who's lifecycle is managed by the grid. 
+        //So we need to remove oursevles from the virtual dom and re-add it - end result is the same, just that this is the only
+        //easy way to tell the grid our VDOm has changed, and the grid needs to re-render
     }
 }
 
